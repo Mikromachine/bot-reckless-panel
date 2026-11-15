@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bot Reckless Panel</title>
+<link rel="icon" id="fav">
+<script>window.LOGO="data:image/webp;base64,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";document.getElementById("fav").href=LOGO;document.documentElement.style.setProperty("--logo","url("+LOGO+")");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#14110d;--side:#100d0a;--panel:#1f1914;--panel2:#2a221a;--line:#382d23;--txt:#efe6d8;--txt2:#cbbfae;--mut:#9a8b7b;--gold:#e0b44c;--gold2:#b98d2e;--ok:#5fbf7a;--bad:#e06a5a;--warn:#e0a24c;--blue:#6aa8e0;--r:12px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:14px/1.45 Inter,system-ui,sans-serif;min-height:100vh}
+body::before{content:"";position:fixed;inset:-40px;background:var(--logo) center/cover no-repeat;filter:blur(30px) brightness(.18) saturate(1.1);z-index:-1}
+a{color:var(--gold)}
+.hidden{display:none!important}
+.sp{flex:1}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.note{color:var(--mut);font-size:13px}
+.num{font-variant-numeric:tabular-nums}
+/* ---- layout ---- */
+#app{display:grid;grid-template-columns:232px minmax(0,1fr);min-height:100vh}
+aside{background:#100d0ae8;border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 16px}
+.brand img{width:40px;height:40px;border-radius:8px;object-fit:cover}
+.brand b{font-family:Rye,serif;font-weight:400;font-size:19px;color:var(--gold);line-height:1.1}
+.brand small{display:block;color:var(--mut);font-size:11px;font-family:Inter;letter-spacing:.4px}
+nav{display:flex;flex-direction:column;gap:2px}
+nav button{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;color:var(--txt2);padding:9px 12px;border-radius:9px;cursor:pointer;font:inherit;text-align:left}
+nav button svg{width:18px;height:18px;flex:none;opacity:.8}
+nav button:hover{background:#ffffff08;color:var(--txt)}
+nav button.on{background:var(--panel2);color:var(--gold)}
+nav button.on svg{opacity:1}
+nav .badge{margin-left:auto;background:var(--bad);color:#fff;border-radius:99px;font-size:11px;font-weight:700;padding:0 7px;line-height:18px}
+.navsep{height:1px;background:var(--line);margin:8px 6px}
+.me{margin-top:auto;padding:12px 10px 0;border-top:1px solid var(--line)}
+.me b{display:block;font-size:13px}.me span{color:var(--mut);font-size:12px}
+main{padding:24px 28px 60px;max-width:1280px;width:100%}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.top h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
+.top .sub{color:var(--mut);font-size:13px}
+/* ---- composants ---- */
+.card{background:#1f1914eb;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.card h3{margin:0 0 12px;font-size:13px;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:8px}
+.grid{display:grid;gap:14px}.grid>*{min-width:0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gbots{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:14px}
+.kpi{padding:14px 16px}.kpi .l{color:var(--mut);font-size:12px;font-weight:500}
+.kpi .v{font-size:26px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.kpi .s{color:var(--mut);font-size:12px;margin-top:2px}
+.seg{display:inline-flex;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:3px}
+.seg button{background:none;border:0;color:var(--mut);padding:5px 11px;border-radius:7px;cursor:pointer;font:inherit;font-size:13px}
+.seg button.on{background:var(--gold);color:#1a140c;font-weight:600}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{color:var(--mut);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+td.r,th.r{text-align:right}
+tr.meRow td{background:#e0b44c14}
+.tw{overflow-x:auto}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.p-ok{background:#5fbf7a22;color:var(--ok)}.p-bad{background:#e06a5a22;color:var(--bad)}.p-mut{background:#ffffff10;color:var(--mut)}.p-warn{background:#e0a24c22;color:var(--warn)}.p-gold{background:#e0b44c22;color:var(--gold)}
+button.b{background:var(--panel2);color:var(--txt);border:1px solid var(--line);padding:7px 12px;border-radius:8px;cursor:pointer;font:inherit;font-weight:500}
+button.b:hover{border-color:var(--gold)}button.g{background:var(--gold);color:#1a140c;border-color:var(--gold);font-weight:600}button.r{color:var(--bad)}button.ok{color:var(--ok)}
+select,input{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+.lnk{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.who-l{cursor:pointer}.who-l:hover{color:var(--gold)}
+.empty{color:var(--mut);font-size:13px;padding:18px 0;text-align:center}
+/* ---- graphiques ---- */
+.vbars{display:flex;align-items:flex-end;gap:3px;height:170px;padding-top:6px;border-bottom:1px solid var(--line)}
+.vbars .c{flex:1;height:100%;display:flex;align-items:flex-end;cursor:default;min-width:0}
+.vbars .c i{display:block;width:100%;background:var(--gold);border-radius:4px 4px 0 0;min-height:2px;transition:background .15s}
+.vbars .c:hover i{background:#f2cb6c}
+.vbars .c.z i{background:var(--line)}
+.xl{display:flex;gap:3px;margin-top:6px}.xl span{flex:1;text-align:center;color:var(--mut);font-size:10.5px;min-width:0;overflow:hidden;white-space:nowrap}
+.hbar{display:grid;grid-template-columns:minmax(90px,150px) 1fr 70px;gap:10px;align-items:center;margin:9px 0;font-size:13px}
+.hbar .t{height:10px;background:var(--panel2);border-radius:5px;overflow:hidden}.hbar .t i{display:block;height:100%;background:var(--gold);border-radius:0 5px 5px 0}
+.hbar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--txt2)}
+.rate{display:inline-flex;align-items:center;gap:8px}.rate .t{width:90px;height:8px;background:var(--panel2);border-radius:4px;overflow:hidden}.rate .t i{display:block;height:100%;background:var(--ok)}
+#tip{position:fixed;pointer-events:none;background:#0d0b09f2;border:1px solid var(--line);color:var(--txt);padding:6px 9px;border-radius:7px;font-size:12px;z-index:50;white-space:nowrap;box-shadow:0 6px 18px #0008}
+/* ---- bots ---- */
+.bot h4{margin:0;font-size:16px}.bot .meta{color:var(--mut);font-size:12px;margin-top:2px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.stats div{background:var(--panel2);border-radius:8px;padding:8px}.stats b{display:block;font-size:17px;font-variant-numeric:tabular-nums}.stats span{color:var(--mut);font-size:11px}
+.msg{font-size:12px;color:var(--mut);min-height:18px;margin-bottom:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{height:6px;background:var(--panel2);border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--mut)}.dot.on{background:var(--ok);box-shadow:0 0 0 3px #5fbf7a33}
+/* ---- login ---- */
+.login{max-width:400px;margin:60px auto}.login .logo{display:block;width:100%;border-radius:10px;margin-bottom:16px}
+.login h2{margin:0 0 6px;font-family:Rye,serif;font-weight:400;color:var(--gold)}
+.login input{width:100%;margin:6px 0}.login .row{margin-top:10px}.err{color:var(--bad);min-height:20px;font-size:13px}
+/* ---- modale ---- */
+#fiche{position:fixed;inset:0;background:#000b;z-index:20;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:30px 16px}
+#fiche>.card{width:100%;max-width:920px;background:var(--panel)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+.fgrid div{background:var(--panel2);border-radius:8px;padding:10px}.fgrid b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.fgrid span{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:13px}.kv dt{color:var(--mut)}.kv dd{margin:0;word-break:break-word}
+.fsec{margin-top:18px}.fsec h4{margin:0 0 8px;color:var(--mut);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.medal{font-size:16px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{background:var(--panel2);border:1px solid var(--line);color:var(--txt2);padding:5px 11px;border-radius:99px;cursor:pointer;font:inherit;font-size:13px}
+.chip.on{background:#e0b44c22;border-color:var(--gold);color:var(--gold)}.chip b{margin-left:4px;font-weight:700}
+.search{flex:1;min-width:180px;max-width:320px}
+th.s{cursor:pointer;user-select:none}th.s:hover{color:var(--txt)}th.s.on{color:var(--gold)}
+.alert{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:10px;background:var(--panel2);margin-bottom:8px;border-left:3px solid var(--mut)}
+.alert.bad{border-left-color:var(--bad)}.alert.warn{border-left-color:var(--warn)}.alert.ok{border-left-color:var(--ok)}.alert.info{border-left-color:var(--blue)}
+.alert .ic{font-size:15px;line-height:20px;width:18px;text-align:center}.alert .tx{flex:1}.alert .tx b{display:block}.alert .tx span{color:var(--mut);font-size:13px}
+.banner{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:11px;margin-bottom:16px;border:1px solid}
+.banner.info{background:#6aa8e014;border-color:#6aa8e055}.banner.important{background:#e0a24c14;border-color:#e0a24c66}.banner.maintenance{background:#e06a5a14;border-color:#e06a5a66}
+.banner .ic{font-size:18px}.banner b{display:block;margin-bottom:2px}
+textarea{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:8px;padding:9px 10px;font:inherit;width:100%;min-height:80px;resize:vertical}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;margin-bottom:8px}.opt.on{border-color:var(--gold);background:#e0b44c0f}
+.opt input{margin-top:3px;accent-color:var(--gold)}.opt b{display:block}
+.ico-note{color:var(--gold);cursor:help;margin-left:4px}
+.sysgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:12px}.sysgrid>div{display:flex;flex-direction:column;min-width:0}.sysgrid>div span{font-size:11px;color:var(--mut)}.sysgrid>div b{font-size:13px;word-break:break-word}
+input[type=checkbox].rsel,input[type=checkbox].rsa{accent-color:var(--gold);cursor:pointer;width:16px;height:16px}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+label.f{display:block;color:var(--mut);font-size:12px;margin:12px 0 5px;text-transform:uppercase;letter-spacing:.5px}
+@media(max-width:980px){.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:820px){
+  #app{grid-template-columns:minmax(0,1fr)}
+  aside{position:sticky;top:0;height:auto;flex-direction:row;align-items:center;padding:8px 10px;z-index:10;border-right:0;border-bottom:1px solid var(--line);gap:8px}
+  .brand{padding:0}.brand b,.brand small{display:none}.brand img{width:34px;height:34px}
+  nav{flex-direction:row;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}nav button{width:auto;white-space:nowrap;padding:8px 10px}nav button span.lbl{display:inline}
+  .navsep,.me{display:none}
+  main{padding:16px 16px 50px;min-width:0}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .v{font-size:22px}.top .seg{width:100%}.top .seg button{flex:1}.g2,.g3{grid-template-columns:1fr}.kv{grid-template-columns:1fr}
+  .hbar{grid-template-columns:100px 1fr 56px}
+}
+</style>
+</head>
+<body>
+<div id="tip" class="hidden"></div>
+
+<section id="v-login" class="login card hidden">
+  <img class="logo lg" alt="Reckless">
+  <h2>Panel Bot Reckless</h2>
+  <p class="note">Ce panel s'ouvre <b>directement depuis le bot</b>. Dans Bot Reckless, clique sur le bouton <b>« Panel en ligne »</b> : tu arrives connecté automatiquement, sans compte ni mot de passe.</p>
+  <p class="note" style="margin-top:12px">Tu vois cette page parce que tu as ouvert l'adresse à la main : repasse par le bouton du bot.</p>
+</section>
+
+<div id="app" class="hidden">
+  <aside>
+    <div class="brand"><img class="lg" alt=""><div><b>Bot Reckless</b><small>PANEL DU SERVEUR</small></div></div>
+    <nav id="nav"></nav>
+    <div class="me"><b id="me-name"></b><span id="me-role"></span><div style="margin-top:8px"><span class="lnk" id="logout">Se déconnecter</span></div></div>
+  </aside>
+  <main>
+    <div id="banner"></div>
+    <div class="top"><div><h1 id="title"></h1><div class="sub" id="subtitle"></div></div><div class="sp"></div><div id="period" class="seg hidden"></div></div>
+
+    <section id="v-dash"></section>
+    <section id="v-live"><div class="grid gbots" id="bots"></div></section>
+    <section id="v-qte"></section>
+    <section id="v-rank"></section>
+    <section id="v-players">
+      <div class="kpis" id="p-kpis"></div>
+      <div class="card">
+        <div class="row" style="margin-bottom:12px"><input id="p-q" class="search" placeholder="Rechercher un pseudo, un PC, une note…"><div class="chips" id="p-chips"></div><div class="sp"></div><button class="b" id="p-instr">📋 Instructions joueur</button><button class="b" id="p-csv">Exporter CSV</button></div>
+        <div id="p-bulk" class="row hidden" style="margin-bottom:10px"></div>
+        <div id="p-selbar" class="row hidden" style="margin-bottom:10px"></div>
+        <div class="tw"><table><thead id="p-head"></thead><tbody id="ptab"></tbody></table></div>
+        <p class="note" style="margin-bottom:0">Stats sur 7 jours. Clique sur un titre de colonne pour trier.</p>
+      </div>
+    </section>
+    <section id="v-log" class="card">
+      <div class="row" style="margin-bottom:12px"><select id="lg-act"><option value="">Toutes les actions</option><option value="inscription">Inscriptions</option><option value="autorise">Autorisations</option><option value="bloque">Blocages</option><option value="pseudo">Changements de pseudo</option><option value="note">Notes</option><option value="version">Versions publiées</option><option value="inscriptions">Mode d'inscription</option><option value="annonce">Annonces</option><option value="purge">Maintenance</option></select></div>
+      <div class="tw"><table><thead><tr><th>Date</th><th>Par</th><th>Action</th><th>Joueur</th><th>Détail</th></tr></thead><tbody id="lgtab"></tbody></table></div>
+    </section>
+    <section id="v-settings"></section>
+    <section id="v-history" class="card">
+      <div class="row" style="margin-bottom:12px">
+        <select id="h-user"><option value="">Tous les joueurs</option></select>
+        <select id="h-kind"><option value="">Tous les événements</option><option value="cycle">Cycles</option><option value="qte_fail">QTE ratés</option><option value="start">Démarrages</option><option value="stop">Arrêts</option><option value="fill">Seaux remplis</option><option value="error">Erreurs</option></select>
+        <input type="date" id="h-day">
+      </div>
+      <div class="tw"><table><thead><tr><th>Heure</th><th>Joueur</th><th>Événement</th><th>Activité</th><th>Détails</th></tr></thead><tbody id="htab"></tbody></table></div>
+    </section>
+    <section id="v-reports" class="card">
+      <div class="row" style="margin-bottom:12px">
+        <select id="rp-user"><option value="">Tous les joueurs</option></select>
+        <select id="rp-kind"><option value="">Tous les types</option><option value="qte_rate">QTE raté</option><option value="qte_manquant">QTE manquant</option><option value="touche_inconnue">Touche inconnue</option><option value="timing">Timing</option><option value="detection">Détection</option><option value="manuel">Signalé par le joueur</option><option value="diagnostic">Vérification config</option></select>
+        <select id="rp-status"><option value="">Tous</option><option value="nouveau">À traiter</option><option value="vu">Vus</option><option value="corrige">Corrigés</option></select>
+      </div>
+      <div id="rp-list"></div>
+    </section>
+    <section id="v-download" class="card">
+      <p style="margin-top:0">Réservé aux joueurs du serveur. Au premier lancement, choisis ton pseudo : c'est tout.</p>
+      <p class="note" id="rel-info">Version actuelle : …</p>
+      <p><a id="dl" class="b g" style="text-decoration:none;display:inline-block;padding:10px 16px;border-radius:9px;background:var(--gold);color:#1a140c;font-weight:600" target="_blank" rel="noopener">Télécharger BotReckless.exe</a></p>
+      <div class="note" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;line-height:1.6">
+        <b style="color:var(--txt)">Si ton navigateur bloque le téléchargement</b> (« BotReckless.exe n'est pas fréquemment téléchargé ») :<br>
+        1. Dans les téléchargements, clique sur les <b>trois points …</b> à droite de BotReckless.exe.<br>
+        2. Clique sur <b>Conserver</b>, puis <b>Afficher plus</b> → <b>Conserver quand même</b>.<br>
+        3. Lance BotReckless.exe. Si Windows affiche « Windows a protégé votre ordinateur » : <b>Informations complémentaires</b> → <b>Exécuter quand même</b>.<br>
+        C'est normal pour un petit programme non signé, et à faire une seule fois : ensuite le bot se met à jour tout seul.
+      </div>
+      <p id="rel-admin" class="note hidden" style="margin-top:16px">Pour publier une nouvelle version : <span class="lnk" onclick="show('settings')">Paramètres → Mise à jour du bot</span>.</p>
+    </section>
+  </main>
+</div>
+<div id="fiche" class="hidden"></div>
+
+<script>
+const SUPABASE_URL = "https://tuzelgwatracdhwbnvhy.supabase.co";
+const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR1emVsZ3dhdHJhY2Rod2Judmh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQzMjQwOTIsImV4cCI6MjEwOTkwMDA5Mn0.vp3voTjOuClvd2nCDugU1nK-95Flw_Tn8PDgEDMvLls";
+const DOWNLOAD_URL = "https://drive.usercontent.google.com/download?id=1BRdlslJ4d7OGR-9NnRn4XZTNnLzIwf3d&export=download&confirm=t";
+document.querySelectorAll("img.lg").forEach(i=>i.src=LOGO);
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ACT = {orpaillage:"Orpaillage", vanille:"Vanille", frangipanier:"Frangipanier"};
+const QT = {timing:"Cercle (Espace)", hold:"Maintien", alternate:"Alternance", sequence:"Série", "?":"Inconnu"};
+const KIND = {cycle:["Cycle terminé","p-gold"],qte_fail:["QTE raté","p-bad"],start:["Démarrage","p-ok"],stop:["Arrêt","p-mut"],fill:["Seau rempli","p-gold"],command:["Commande","p-warn"],error:["Erreur","p-bad"]};
+const RKIND={qte_rate:["QTE raté","p-bad"],qte_manquant:["QTE manquant","p-warn"],touche_inconnue:["Touche inconnue","p-warn"],timing:["Timing","p-warn"],detection:["Détection","p-warn"],manuel:["Signalé par le joueur","p-gold"],diagnostic:["Vérification config","p-mut"]};
+const RSTAT={nouveau:["À traiter","p-bad"],vu:["Vu","p-warn"],corrige:["Corrigé","p-ok"]};
+const ICO = {
+  dash:'<path d="M3 13h8V3H3zm10 8h8V11h-8zM3 21h8v-6H3zm10-18v6h8V3z"/>',
+  live:'<path d="M12 8a4 4 0 100 8 4 4 0 000-8zm-7.07-2.93l1.41 1.41A7.95 7.95 0 004 12c0 2.21.9 4.21 2.34 5.66l-1.41 1.41A9.96 9.96 0 012 12c0-2.76 1.12-5.26 2.93-7.07zm14.14 0A9.96 9.96 0 0122 12c0 2.76-1.12 5.26-2.93 7.07l-1.41-1.41A7.95 7.95 0 0020 12c0-2.21-.9-4.21-2.34-5.66z"/>',
+  qte:'<path d="M3 3v18h18v-2H5V3zm4 12h2v3H7zm4-5h2v8h-2zm4 2h2v6h-2zm4-6h2v12h-2z"/>',
+  rank:'<path d="M7 3h10v3a5 5 0 01-4 4.9V14h3v2H8v-2h3v-3.1A5 5 0 017 6zm-4 1h3v2a3 3 0 01-3-3zm15 0h3a3 3 0 01-3 3zM6 18h12v3H6z"/>',
+  players:'<path d="M16 11a3 3 0 100-6 3 3 0 000 6zm-8 0a3 3 0 100-6 3 3 0 000 6zm0 2c-2.7 0-8 1.3-8 4v3h16v-3c0-2.7-5.3-4-8-4zm8 0c-.3 0-.7 0-1.1.1A4.2 4.2 0 0118 17v3h6v-3c0-2.7-5.3-4-8-4z"/>',
+  history:'<path d="M13 3a9 9 0 00-9 9H1l4 4 4-4H6a7 7 0 112 4.9l-1.4 1.4A9 9 0 1013 3zm-1 5v5l4.3 2.5.7-1.2-3.5-2.1V8z"/>',
+  reports:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/>',
+  download:'<path d="M5 20h14v-2H5zm14-11h-4V3H9v6H5l7 7z"/>',
+  log:'<path d="M4 4h16v2H4zm0 5h10v2H4zm0 5h16v2H4zm0 5h10v2H4zm13-9l4 3-4 3z"/>',
+  settings:'<path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 00-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/>'
+};
+let me=null, profiles=[], status={}, view="dash", DAYS=7, STATS=null, REL=null;
+$("dl").href = DOWNLOAD_URL;
+sb.from("app_release").select("*").eq("id",1).maybeSingle().then(({data})=>{ if(data){ REL=data; $("dl").href=data.download_url||data.url; } });
+
+// ---------- utilitaires ----------
+function ago(t){ if(!t) return "jamais"; const s=(Date.now()-new Date(t))/1000; if(s<60) return "il y a "+Math.round(s)+" s"; if(s<3600) return "il y a "+Math.round(s/60)+" min"; if(s<86400) return "il y a "+Math.round(s/3600)+" h"; return new Date(t).toLocaleDateString("fr-FR"); }
+function fmt(t){ return new Date(t).toLocaleString("fr-FR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"}); }
+function dur(s){ s=Math.round(s||0); if(s<60) return s?"< 1 min":"0 min"; const m=Math.round(s/60); return m<60? m+" min" : Math.floor(m/60)+" h "+String(m%60).padStart(2,"0"); }
+function nf(n){ return (n||0).toLocaleString("fr-FR"); }
+function online(st){ return st && (Date.now()-new Date(st.updated_at)) < 60000; }
+function pname(uid){ const p=profiles.find(p=>p.id===uid); return p ? (p.pseudo||p.email||"Joueur") : (me&&uid===me.id ? (me.pseudo||me.email) : "?"); }
+function rateOf(q,f){ const ok=Math.max(0,(q||0)-(f||0)), n=ok+(f||0); return n? Math.round(ok*1000/n)/10 : null; }
+function rateCol(r){ return r===null?"var(--txt)":r>=95?"var(--ok)":r>=85?"var(--warn)":"var(--bad)"; }
+const isAdm = () => me && me.role==="admin";
+function dayKey(d){ return d.toLocaleDateString("sv-SE",{timeZone:"Europe/Paris"}); }
+
+// infobulle des graphiques
+const TIP=$("tip");
+document.addEventListener("mousemove",e=>{ const t=e.target.closest&&e.target.closest("[data-tip]"); if(!t){ TIP.classList.add("hidden"); return; }
+  TIP.innerHTML=t.dataset.tip; TIP.classList.remove("hidden");
+  const w=TIP.offsetWidth; TIP.style.left=Math.min(innerWidth-w-8,e.clientX+12)+"px"; TIP.style.top=(e.clientY-36)+"px"; });
+
+function vbars(items, unit){
+  const mx=Math.max(1,...items.map(i=>i.v)), every=Math.ceil(items.length/14);
+  return `<div class="vbars">${items.map(i=>`<div class="c ${i.v?"":"z"}" data-tip="<b>${esc(i.full||i.l)}</b> · ${nf(i.v)} ${unit}${i.extra?" · "+i.extra:""}"><i style="height:${Math.max(1.5,i.v*100/mx)}%"></i></div>`).join("")}</div>
+    <div class="xl">${items.map((i,k)=>`<span>${k%every===0?esc(i.l):""}</span>`).join("")}</div>`;
+}
+function hbars(items, unit){
+  const mx=Math.max(1,...items.map(i=>i.v));
+  return items.map(i=>`<div class="hbar" data-tip="<b>${esc(i.l)}</b> · ${nf(i.v)} ${unit}"><span>${esc(i.l)}</span><div class="t"><i style="width:${i.v*100/mx}%"></i></div><span class="v">${nf(i.v)}</span></div>`).join("") || `<div class="empty">Rien sur la période.</div>`;
+}
+function rateCell(r){ return r===null?'<span class="note">–</span>':`<span class="rate"><span class="t"><i style="width:${r}%;background:${rateCol(r)}"></i></span><b class="num" style="color:${rateCol(r)}">${r} %</b></span>`; }
+function kpi(l,v,s,col){ return `<div class="card kpi"><div class="l">${l}</div><div class="v" ${col?`style="color:${col}"`:""}>${v}</div>${s?`<div class="s">${s}</div>`:""}</div>`; }
+
+// ---------- auth ----------
+// Plus aucune connexion par email/mot de passe : joueurs ET admin arrivent deja
+// connectes via le bot (bouton « Panel en ligne »). L'admin est reconnu par son role.
+const RECOVERY = false;
+$("logout").onclick = async () => { await sb.auth.signOut({scope:"local"}); location.reload(); };
+
+// ---------- navigation ----------
+const VIEWS = {
+  dash:{t:()=>isAdm()?"Tableau de bord":"Mon espace", s:()=>isAdm()?"Vue d'ensemble de tous les bots du serveur":"Tes stats de farm et l'état de ton bot", period:true},
+  live:{t:()=>"En direct", s:()=>"Les bots en temps réel (mise à jour automatique)", adm:true},
+  qte:{t:()=>"Analyse QTE", s:()=>"Réussite par type de QTE, par version du bot et réglage du cercle", adm:true, period:true},
+  rank:{t:()=>"Classement", s:()=>"Les meilleurs farmeurs du serveur", period:true},
+  players:{t:()=>"Joueurs", s:()=>"Autoriser ou bloquer les joueurs", adm:true},
+  history:{t:()=>"Historique", s:()=>"Tous les événements envoyés par les bots"},
+  reports:{t:()=>isAdm()?"Rapports":"Mes rapports", s:()=>isAdm()?"QTE ratés, problèmes signalés et vérifications de config":"Tes vérifications de config et problèmes signalés"},
+  download:{t:()=>"Télécharger", s:()=>"Le bot et ses mises à jour"},
+  log:{t:()=>"Journal admin", s:()=>"Qui a fait quoi : inscriptions, blocages, versions, annonces", adm:true},
+  settings:{t:()=>"Paramètres", s:()=>"Inscriptions, annonce aux joueurs, mises à jour et maintenance", adm:true}
+};
+const NAV_LBL = {dash:()=>isAdm()?"Tableau de bord":"Mon espace", live:()=>"En direct", qte:()=>"Analyse QTE", rank:()=>"Classement", players:()=>"Joueurs", history:()=>"Historique", reports:()=>isAdm()?"Rapports":"Mes rapports", download:()=>"Télécharger", log:()=>"Journal admin", settings:()=>"Paramètres"};
+function buildNav(){
+  const order = isAdm() ? ["dash","live","players","qte","rank","sep","reports","history","log","settings","download"] : ["dash","rank","history","reports","download"];
+  $("nav").innerHTML = order.map(v => v==="sep" ? '<div class="navsep"></div>' :
+    `<button data-v="${v}"><svg viewBox="0 0 24 24" fill="currentColor">${ICO[v]}</svg><span class="lbl">${NAV_LBL[v]()}</span>${v==="reports"?'<span class="badge hidden" id="rep-badge"></span>':v==="players"?'<span class="badge hidden" id="pend-badge"></span>':""}</button>`).join("");
+  document.querySelectorAll("#nav button").forEach(b => b.onclick = () => show(b.dataset.v));
+  $("period").innerHTML = [[1,"Aujourd'hui"],[7,"7 jours"],[30,"30 jours"]].map(([d,l])=>`<button data-d="${d}" class="${d===DAYS?"on":""}">${l}</button>`).join("");
+  $("period").querySelectorAll("button").forEach(b=>b.onclick=()=>{ DAYS=+b.dataset.d; $("period").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); show(view); });
+}
+function show(v){
+  view=v; const V=VIEWS[v];
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  Object.keys(VIEWS).forEach(x=>$("v-"+x).classList.toggle("hidden",x!==v));
+  $("title").textContent=V.t(); $("subtitle").textContent=V.s(); $("period").classList.toggle("hidden",!V.period);
+  if(v==="dash") loadDash(); if(v==="live") renderLive(); if(v==="qte") loadQte(); if(v==="rank") loadRank();
+  if(v==="players") loadPlayers(); if(v==="history") loadHistory(); if(v==="reports") loadReports(); if(v==="download") loadRelease();
+  if(v==="log") loadLog(); if(v==="settings") loadSettings();
+  window.scrollTo(0,0);
+}
+
+// ---------- données ----------
+async function loadProfiles(){ const {data} = await sb.from("profiles").select("*").order("created_at"); profiles=data||[]; }
+async function loadStatus(){ const {data} = await sb.from("bot_status").select("*"); status={}; (data||[]).forEach(s=>status[s.user_id]=s); }
+async function stats(days, uid){ const {data,error} = await sb.rpc("panel_stats",{p_days:days, p_user:uid||null}); if(error){ console.error(error); return null; } return data; }
+
+function fillDays(days, n){
+  const out=[], map={}; (days||[]).forEach(d=>map[d.d]=d);
+  for(let i=n-1;i>=0;i--){ const dt=new Date(Date.now()-i*86400000), k=dayKey(dt); const d=map[k]||{c:0,q:0};
+    out.push({l:dt.toLocaleDateString("fr-FR",{day:"2-digit",month:n>14?undefined:"2-digit"}), full:dt.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}), v:d.c, extra:nf(d.q)+" QTE"}); }
+  return out;
+}
+function hours(h){ const m={}; (h||[]).forEach(x=>m[x.h]=x.c); return Array.from({length:24},(_,i)=>({l:i+"h", full:i+"h – "+(i+1)+"h", v:m[i]||0})); }
+
+// ---------- carte bot ----------
+function botCard(p){
+  const s=status[p.id]||{}, ol=online(s);
+  const st = !p.allowed ? `<span class="pill p-bad">Bloqué</span>` : !ol ? `<span class="pill p-mut">Hors ligne</span>` : s.running ? `<span class="pill p-ok">En cours</span>` : `<span class="pill p-warn">À l'arrêt</span>`;
+  const water = s.water!=null ? `<div class="bar" data-tip="Eau ${s.water} %"><i style="width:${s.water}%"></i></div>` : "";
+  const ctrl = (isAdm() && p.id!==me.id) ? `<div class="row"><button class="b ${p.allowed?"r":"ok"}" onclick="setAllowed('${p.id}',${!p.allowed})">${p.allowed?"Bloquer":"Autoriser"}</button><button class="b" onclick="openFiche('${p.id}')">Fiche</button></div>` : "";
+  return `<div class="card bot">
+    <div class="row"><span class="dot ${ol?"on":""}"></span><h4 class="who-l" onclick="openFiche('${p.id}')">${esc(p.pseudo||p.email)}</h4><div class="sp"></div>${st}</div>
+    <div class="meta">${esc(ACT[s.activity]||s.activity||"—")} · v${esc(p.bot_version||"?")} · vu ${ago(s.updated_at)}</div>
+    <div class="stats"><div><b>${s.cycles??0}</b><span>cycles</span></div><div><b style="color:var(--ok)">${s.qte_ok??0}</b><span>QTE ok</span></div><div><b style="color:var(--bad)">${s.qte_fail??0}</b><span>QTE ratés</span></div></div>
+    <div class="row note" style="margin-bottom:6px">${s.water!=null?`Eau ${s.water} %`:""}${s.bucket_left!=null?` · Seau ${s.bucket_left}/5`:""}${s.last_qte?` · Dernier QTE : ${esc(QT[s.last_qte]||s.last_qte)}`:""}</div>
+    ${water}
+    <div class="msg" title="${esc(s.last_msg)}" style="margin-top:8px">${esc(s.last_msg||"")}</div>
+    ${ctrl}</div>`;
+}
+function renderLive(){
+  const list = profiles.filter(p => isAdm() || p.id===me.id).sort((a,b)=>(online(status[b.id])?1:0)-(online(status[a.id])?1:0));
+  $("bots").innerHTML = list.map(botCard).join("") || `<div class="empty">Aucun joueur pour l'instant.</div>`;
+}
+
+// ---------- tableau de bord ----------
+async function loadDash(){
+  const el=$("v-dash"); if(!STATS) el.innerHTML=`<div class="empty">Chargement…</div>`;
+  const [S, R] = await Promise.all([stats(DAYS), isAdm()? Promise.resolve(null) : sb.rpc("leaderboard",{p_days:DAYS}).then(r=>r.data)]);
+  if(view!=="dash") return; STATS=S; if(!S){ el.innerHTML=`<div class="empty">Statistiques indisponibles.</div>`; return; }
+  const T=S.totals, rate=rateOf(T.qte,T.fails), per=DAYS===1?"aujourd'hui":DAYS+" derniers jours";
+  const ndays = DAYS===1?1:DAYS;
+  const dayChart = DAYS===1 ? `<h3>Cycles par heure</h3>${vbars(hours(S.hours),"cycles")}` : `<h3>Cycles par jour</h3>${vbars(fillDays(S.days,ndays),"cycles")}`;
+  const acts = Object.entries(S.acts||{}).map(([k,v])=>({l:ACT[k]||k,v})).sort((a,b)=>b.v-a.v);
+  if(isAdm()){
+    const on=profiles.filter(p=>online(status[p.id])), run=on.filter(p=>status[p.id].running);
+    const {count}=await sb.from("qte_reports").select("id",{count:"exact",head:true}).eq("status","nouveau");
+    const users=(S.users||[]).filter(u=>u.c>0).sort((a,b)=>b.c-a.c).slice(0,8);
+    el.innerHTML = `<div class="kpis">
+      ${kpi("Bots en ligne", on.length, `${run.length} en train de farmer`)}
+      ${kpi("Cycles", nf(T.cycles), per)}
+      ${kpi("QTE réussis", rate===null?"–":rate+" %", `${nf(Math.max(0,T.qte-T.fails))} ok · ${nf(T.fails)} ratés`, rateCol(rate))}
+      ${kpi("Temps de farm", dur(T.farm_s), `${nf(T.sessions)} sessions · ${T.players} joueur(s)`)}
+      ${kpi("Seaux remplis", nf(T.fills), T.errors?`${T.errors} erreur(s)`:"aucune erreur")}
+      ${(()=>{const pep=Math.round(Math.max(0,T.qte-T.fails)*2/3);return kpi("Or estimé", nf(pep)+" pép.", "≈ "+(pep*0.15).toFixed(2).replace('.',',')+" $ · "+per, "var(--gold)");})()}
+      ${kpi("Rapports à traiter", count||0, `<span class="lnk" onclick="show('reports');$('rp-status').value='nouveau';loadReports()">Voir</span>`, count?"var(--bad)":null)}
+    </div>
+    <div class="card" style="margin-bottom:14px"><h3>À surveiller</h3><div id="alerts"><div class="note">Analyse…</div></div></div>
+    <div class="grid g2" style="margin-bottom:14px">
+      <div class="card">${dayChart}</div>
+      <div class="card"><h3>Activité selon l'heure</h3>${vbars(hours(S.hours),"cycles")}</div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Meilleurs joueurs <span class="sp"></span><span class="lnk" style="text-transform:none;font-weight:500" onclick="show('rank')">Classement</span></h3>
+        ${users.length?`<div class="tw"><table><thead><tr><th>Joueur</th><th class="r">Cycles</th><th>QTE réussis</th><th class="r">Farm</th></tr></thead><tbody>${users.map(u=>`<tr><td><b class="who-l" onclick="openFiche('${u.u}')">${esc(pname(u.u))}</b></td><td class="r num">${nf(u.c)}</td><td>${rateCell(rateOf(u.q,u.f))}</td><td class="r note">${dur(u.farm_s)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Aucun cycle sur la période.</div>`}</div>
+      <div class="card"><h3>Cycles par activité</h3>${hbars(acts,"cycles")}
+        <h3 style="margin-top:18px">Bots en ligne <span class="sp"></span><span class="lnk" style="text-transform:none;font-weight:500" onclick="show('live')">Tout voir</span></h3>
+        ${on.length?on.map(p=>{const s=status[p.id];return `<div class="row" style="margin:7px 0"><span class="dot on"></span><b class="who-l" onclick="openFiche('${p.id}')">${esc(p.pseudo||p.email)}</b><span class="note">${esc(ACT[s.activity]||s.activity||"")}</span><div class="sp"></div>${s.running?'<span class="pill p-ok">En cours</span>':'<span class="pill p-warn">À l\'arrêt</span>'}</div>`}).join(""):'<div class="empty">Aucun bot en ligne.</div>'}</div>
+    </div>`;
+    renderAlerts(S, count||0);
+  } else {
+    const mine=(R||[]).findIndex(x=>x.me), rank = mine>=0 ? mine+1 : null;
+    const {data:diag}=await sb.from("qte_reports").select("id,ts,message").eq("kind","diagnostic").order("ts",{ascending:false}).limit(1);
+    const d=(diag||[])[0], probs=d?((d.message||"").match(/PROBLEME[^|]*/g)||[]):[];
+    const fails=Object.entries(S.fail_types||{}).map(([k,v])=>({l:QT[k]||k,v})).sort((a,b)=>b.v-a.v);
+    el.innerHTML = `<div class="kpis">
+      ${kpi("Cycles", nf(T.cycles), per)}
+      ${kpi("QTE réussis", rate===null?"–":rate+" %", `${nf(Math.max(0,T.qte-T.fails))} ok · ${nf(T.fails)} ratés`, rateCol(rate))}
+      ${kpi("Temps de farm", dur(T.farm_s), `${nf(T.sessions)} session(s)`)}
+      ${kpi("Seaux remplis", nf(T.fills))}
+      ${kpi("Classement", rank?(rank===1?"🥇 1er":rank+"e"):"–", rank?`sur ${(R||[]).length} joueur(s)`:"aucun cycle sur la période")}
+    </div>
+    <div class="grid g2" style="margin-bottom:14px">
+      <div>${botCard(me)}</div>
+      <div class="card"><h3>Dernière vérification de config</h3>
+        ${d?`<p style="margin:0 0 8px">${probs.length?`<span class="pill p-bad">${probs.length} problème(s)</span>`:'<span class="pill p-ok">Tout est bon</span>'} <span class="note">${ago(d.ts)}</span></p>
+          ${(d.message||"").split(" | ").map(x=>`<div class="note" style="margin:3px 0;color:${/^PROBLEME/.test(x)?"var(--bad)":/^ATTENTION/.test(x)?"var(--warn)":"var(--txt2)"}">${esc(x.replace(/^(OK|ATTENTION|PROBLEME) /,""))}</div>`).join("")}`
+          :`<p class="note">Aucune vérification pour l'instant. Dans le bot, clique sur <b>« Vérifier ma config »</b> avec RedM ouvert.</p>`}
+      </div>
+    </div>
+    <div class="grid g2">
+      <div class="card">${dayChart}</div>
+      <div class="card"><h3>QTE ratés par type</h3>${fails.length?hbars(fails,"ratés"):'<div class="empty">Aucun QTE raté sur la période. 👍</div>'}
+        <h3 style="margin-top:18px">Cycles par activité</h3>${hbars(acts,"cycles")}</div>
+    </div>`;
+  }
+}
+
+// ---------- analyse QTE ----------
+async function loadQte(){
+  const el=$("v-qte"); el.innerHTML=`<div class="empty">Chargement…</div>`;
+  const S=await stats(DAYS); if(view!=="qte") return;
+  if(!S){ el.innerHTML=`<div class="empty">Statistiques indisponibles.</div>`; return; }
+  const types=Object.keys(QT).filter(k=>k!=="?");
+  const QTs=S.qte_types||{}, TF=S.type_fails||{}, FT=S.fail_types||{};
+  const hasDetail=Object.keys(QTs).length>0;
+  const rows=types.map(k=>({k, n:QTs[k]||0, f:TF[k]||0, fall:FT[k]||0})).filter(r=>r.n||r.fall);
+  const vers=(S.versions||[]).slice().sort((a,b)=>String(b.v).localeCompare(String(a.v),undefined,{numeric:true}));
+  const inst={}; profiles.filter(p=>p.last_seen && Date.now()-new Date(p.last_seen)<30*86400000).forEach(p=>{ const v=p.bot_version||"?"; inst[v]=(inst[v]||0)+1; });
+  const instItems=Object.entries(inst).map(([l,v])=>({l:"v"+l,v})).sort((a,b)=>b.l.localeCompare(a.l,undefined,{numeric:true}));
+  const circ=(S.users||[]).filter(u=>u.retard!=null||u.vit!=null);
+  const T=S.totals, rate=rateOf(T.qte,T.fails);
+  const byRes={};
+  (S.users||[]).forEach(u=>{ const p=profiles.find(x=>x.id===u.u); const r=(p&&p.sys_info&&p.sys_info.ecran_jeu)||"inconnu"; const o=byRes[r]||(byRes[r]={pl:0,q:0,f:0}); o.pl++; o.q+=u.q||0; o.f+=u.f||0; });
+  const resRows=Object.entries(byRes).map(([res,o])=>({res,pl:o.pl,q:o.q,f:o.f})).sort((a,b)=>(b.q+b.f)-(a.q+a.f));
+  const resHtml = resRows.length?`<div class="tw"><table><thead><tr><th>Résolution</th><th class="r">Joueurs</th><th class="r">QTE</th><th class="r">Ratés</th><th>Réussite</th></tr></thead><tbody>${resRows.map(r=>`<tr><td><b>${esc(r.res)}</b></td><td class="r num">${r.pl}</td><td class="r num">${nf(r.q)}</td><td class="r num" style="color:${r.f?"var(--bad)":"inherit"}">${nf(r.f)}</td><td>${r.q||r.f?rateCell(rateOf(r.q,r.f)):'<span class="note">–</span>'}</td></tr>`).join("")}</tbody></table></div><p class="note" style="margin-bottom:0">La résolution vient des bots à jour (3.52+). Un taux bas sur un format précis (ex. 21:9 ultrawide) = zones écran à adapter.</p>`:`<div class="empty">Les résolutions apparaissent au fur et à mesure que les joueurs passent en 3.52+.</div>`;
+  const byVer={};
+  (S.users||[]).forEach(u=>{ const p=profiles.find(x=>x.id===u.u); const v=(p&&p.bot_version)||"?"; const o=byVer[v]||(byVer[v]={pl:0,q:0,f:0}); o.pl++; o.q+=u.q||0; o.f+=u.f||0; });
+  const verRows=Object.entries(byVer).map(([v,o])=>({v,pl:o.pl,q:o.q,f:o.f})).sort((a,b)=>a.v<b.v?1:-1);
+  const verHtml = verRows.length?`<div class="tw"><table><thead><tr><th>Version</th><th class="r">Joueurs</th><th class="r">QTE</th><th class="r">Ratés</th><th>Réussite</th></tr></thead><tbody>${verRows.map(r=>`<tr><td><b>v${esc(r.v)}</b></td><td class="r num">${r.pl}</td><td class="r num">${nf(r.q)}</td><td class="r num" style="color:${r.f?"var(--bad)":"inherit"}">${nf(r.f)}</td><td>${r.q||r.f?rateCell(rateOf(r.q,r.f)):'<span class="note">–</span>'}</td></tr>`).join("")}</tbody></table></div><p class="note" style="margin-bottom:0">Compare la réussite entre versions : si la dernière fait mieux, tes correctifs fonctionnent.</p>`:`<div class="empty">Pas encore de données par version.</div>`;
+  el.innerHTML = `<div class="kpis">
+      ${kpi("QTE résolus", nf(T.qte))}
+      ${kpi("QTE ratés", nf(T.fails), "", T.fails?"var(--bad)":null)}
+      ${kpi("Taux de réussite", rate===null?"–":rate+" %", "", rateCol(rate))}
+      ${kpi("Cercles ratés", nf(FT.timing||0), T.fails?Math.round((FT.timing||0)*100/T.fails)+" % des ratés":"")}
+    </div>
+    <div class="grid g2" style="margin-bottom:14px">
+      <div class="card"><h3>Réussite par type de QTE</h3>
+        ${rows.length?`<div class="tw"><table><thead><tr><th>Type</th><th class="r">Résolus</th><th class="r">Ratés</th><th>Réussite</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${QT[r.k]}</td><td class="r num">${r.n?nf(r.n):'<span class="note">–</span>'}</td><td class="r num" style="color:${r.fall?"var(--bad)":"inherit"}">${nf(r.fall)}</td><td>${r.n?rateCell(rateOf(r.n,r.f)):'<span class="note">dès la 3.47</span>'}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Aucun QTE sur la période.</div>`}
+        ${hasDetail?"":`<p class="note" style="margin-bottom:0">Le nombre de QTE résolus par type arrive avec la version 3.47 du bot. Avant, seuls les ratés sont classés par type.</p>`}
+      </div>
+      <div class="card"><h3>Réussite par version du bot</h3>
+        ${vers.length?`<div class="tw"><table><thead><tr><th>Version</th><th class="r">Cycles</th><th class="r">QTE</th><th class="r">Ratés</th><th>Réussite</th></tr></thead><tbody>${vers.map(v=>`<tr><td><b>${esc(v.v)}</b></td><td class="r num">${nf(v.c)}</td><td class="r num">${nf(v.q)}</td><td class="r num">${nf(v.f)}</td><td>${rateCell(rateOf(v.q,v.f))}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">Aucune donnée.</div>`}
+        <p class="note" style="margin-bottom:0">Compare les versions pour vérifier qu'une mise à jour améliore vraiment les QTE.</p>
+      </div>
+    </div>
+    <div class="grid g2">
+      <div class="card"><h3>Versions installées (joueurs actifs 30 j)</h3>${hbars(instItems,"joueur(s)")}
+        ${REL?`<p class="note" style="margin-bottom:0">Dernière version publiée : <b>${esc(REL.version)}</b></p>`:""}</div>
+      <div class="card"><h3>Réglage automatique du cercle</h3>
+        ${circ.length?`<div class="tw"><table><thead><tr><th>Joueur</th><th class="r">Retard réglé</th><th class="r">Vitesse moy. aiguille</th></tr></thead><tbody>${circ.map(u=>`<tr><td><b class="who-l" onclick="openFiche('${u.u}')">${esc(pname(u.u))}</b></td><td class="r num">${u.retard!=null?u.retard+" ms":"–"}</td><td class="r num">${u.vit!=null?u.vit+" °/s":"–"}</td></tr>`).join("")}</tbody></table></div>`
+          :`<div class="empty">Disponible avec la version 3.47 : chaque bot règle tout seul son retard pour viser le milieu de la zone.</div>`}
+        <p class="note" style="margin-bottom:0">Un retard très différent des autres joueurs peut indiquer un PC lent ou un ping élevé.</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><h3>Réussite par résolution d'écran</h3>${resHtml}</div>
+      <div class="card"><h3>Réussite par version du bot</h3>${verHtml}</div>
+    </div>`;
+}
+
+// ---------- classement ----------
+async function loadRank(){
+  const el=$("v-rank"); el.innerHTML=`<div class="empty">Chargement…</div>`;
+  const {data,error}=await sb.rpc("leaderboard",{p_days:DAYS}); if(view!=="rank") return;
+  if(error){ el.innerHTML=`<div class="empty">${esc(error.message)}</div>`; return; }
+  const L=data||[], M=["🥇","🥈","🥉"];
+  const best=L.filter(x=>x.qte+x.fails>=20).map(x=>({...x,r:rateOf(x.qte,x.fails)})).sort((a,b)=>b.r-a.r)[0];
+  const top=L.slice().sort((a,b)=>b.farm_s-a.farm_s)[0];
+  el.innerHTML = `<div class="kpis">
+      ${kpi("Joueurs classés", L.length)}
+      ${kpi("Plus de cycles", L[0]?esc(L[0].pseudo):"–", L[0]?nf(L[0].cycles)+" cycles":"")}
+      ${kpi("Meilleure précision", best?esc(best.pseudo):"–", best?best.r+" % de QTE réussis":"20 QTE minimum")}
+      ${kpi("Plus de temps de farm", top?esc(top.pseudo):"–", top?dur(top.farm_s):"")}
+    </div>
+    <div class="card"><div class="tw"><table><thead><tr><th style="width:60px">#</th><th>Joueur</th><th class="r">Cycles</th><th class="r">QTE</th><th>Réussite</th><th class="r">Or (est.)</th><th class="r">Temps de farm</th></tr></thead>
+    <tbody>${L.map((x,i)=>`<tr class="${x.me?"meRow":""}"><td>${i<3?`<span class="medal">${M[i]}</span>`:`<span class="note">${i+1}</span>`}</td><td><b>${esc(x.pseudo)}</b>${x.me?' <span class="pill p-gold">toi</span>':""}</td><td class="r num">${nf(x.cycles)}</td><td class="r num">${nf(x.qte)}</td><td>${rateCell(rateOf(x.qte,x.fails))}</td><td class="r num" style="color:var(--gold)">${nf(Math.round(Math.max(0,(x.qte||0)-(x.fails||0))*2/3))}</td><td class="r note">${dur(x.farm_s)}</td></tr>`).join("")||`<tr><td colspan="7" class="empty">Personne n'a farmé sur la période.</td></tr>`}</tbody></table></div></div>`;
+}
+
+// ---------- joueurs ----------
+let PSTATS={}, PF="all", PSORT={k:"last",d:-1}, DECIDED=new Set();
+function cmpv(a,b){ const x=String(a||"0").split(".").map(Number), y=String(b||"0").split(".").map(Number); for(let i=0;i<Math.max(x.length,y.length);i++){ const d=(x[i]||0)-(y[i]||0); if(d) return d; } return 0; }
+function isPending(p){ return !p.allowed && !DECIDED.has(p.id) && p.role!=="admin"; }
+function isOld(p){ return REL && p.bot_version && cmpv(p.bot_version, REL.version) < 0; }
+function active7(p){ return p.last_seen && Date.now()-new Date(p.last_seen) < 7*86400000; }
+// "en galère" = le bot a tourné (cycles) mais n'a résolu AUCUN QTE -> détection écran cassée (ex. ultrawide)
+function enGalere(p){ const u=PSTATS[p.id]||{}; return (u.c||0)>=3 && (u.q||0)===0; }
+// or estime : 2 pepites pour 3 QTE reussis
+function orEst(u){ u=u||{}; return Math.round(Math.max(0,(u.q||0)-(u.f||0))*2/3); }
+// infos techniques (sys_info) + detection multi-comptes
+function mid(p){ return (p.sys_info&&p.sys_info.machine_id)||null; }
+function pip(p){ return (p.sys_info&&p.sys_info.ip)||null; }
+function gameName(p){ return (p.sys_info&&p.sys_info.pseudo_jeu)||null; }
+function dups(p){ const m=mid(p), ip=pip(p); if(!m&&!ip) return []; return profiles.filter(o=>o.id!==p.id&&((m&&mid(o)===m)||(ip&&pip(o)===ip))); }
+function sysBlock(p){ const s=p.sys_info; if(!s) return '<div class="note" style="margin-top:12px">Infos techniques indisponibles (bot &lt; 3.52 ou pas encore synchronisé).</div>';
+  const rows=[['Pseudo en jeu',s.pseudo_jeu],['Écran de jeu',s.ecran_jeu],['Autres écrans',(s.ecrans||[]).join('  ')],['Échelle',s.echelle],['Carte graphique',s.gpu],['Processeur',s.cpu],['Cœurs',s.coeurs],['RAM',s.ram_go?s.ram_go+' Go':null],['Système',s.os],['Clavier',s.clavier],['Nom du PC',s.pc],['IP',s.ip],['ID machine',s.machine_id],['Admin Windows',s.admin==null?null:(s.admin?'oui':'non')],['Lancé en .exe',s.bot_exe==null?null:(s.bot_exe?'oui':'non')]];
+  return '<div class="sysgrid">'+rows.filter(r=>r[1]!=null&&r[1]!=='').map(r=>`<div><span>${r[0]}</span><b>${esc(String(r[1]))}</b></div>`).join('')+'</div>'; }
+// selection groupee
+let PSEL=new Set(), PLIST=[];
+function togSel(id,ch){ ch?PSEL.add(id):PSEL.delete(id); renderSelBar(); }
+function togSelAll(ch){ PLIST.forEach(id=>ch?PSEL.add(id):PSEL.delete(id)); renderPlayers(); }
+function renderSelBar(){ const bar=$("p-selbar"); if(!bar) return; if(!PSEL.size){ bar.classList.add("hidden"); bar.innerHTML=""; return; } const act=profiles.filter(p=>PSEL.has(p.id)&&p.id!==me.id&&p.role!=="admin").length; bar.classList.remove("hidden"); bar.innerHTML=`<span class="pill p-gold">${PSEL.size} sélectionné(s)</span><div class="sp"></div><button class="b ok" onclick="bulkSet(true)">Autoriser (${act})</button><button class="b r" onclick="bulkSet(false)">Bloquer (${act})</button><button class="b" onclick="PSEL.clear();renderPlayers()">Annuler</button>`; }
+async function bulkSet(allowed){ const ids=profiles.filter(p=>PSEL.has(p.id)&&p.id!==me.id&&p.role!=="admin").map(p=>p.id); if(!ids.length) return; if(!confirm((allowed?"Autoriser":"Bloquer")+" "+ids.length+" joueur(s) d'un coup ?")) return; const {error}=await sb.from("profiles").update({allowed}).in("id",ids); if(error) return alert(error.message); PSEL.clear(); await loadProfiles(); loadPlayers(); }
+async function loadDecided(){ const {data}=await sb.from("admin_log").select("target_id").in("action",["autorise","bloque"]); DECIDED=new Set((data||[]).map(x=>x.target_id)); }
+function pendBadge(){ const n=profiles.filter(isPending).length, b=$("pend-badge"); if(b){ b.textContent=n||""; b.classList.toggle("hidden",!n); } }
+async function loadPlayers(){
+  if(!REL) await loadRelease();
+  const [S]=await Promise.all([stats(7), loadDecided()]);
+  PSTATS={}; ((S&&S.users)||[]).forEach(u=>PSTATS[u.u]=u);
+  renderPlayers(); pendBadge();
+}
+const PFILTERS = {all:["Tous",()=>true], online:["En ligne",p=>online(status[p.id])], galere:["⚠ En galère",p=>enGalere(p)], pending:["En attente",isPending], blocked:["Bloqués",p=>!p.allowed&&!isPending(p)], old:["Version ancienne",p=>isOld(p)&&active7(p)], inactive:["Inactifs 7 j",p=>!active7(p)]};
+const PCOLS = [["pseudo","Joueur"],["status","Statut"],["ver","Version"],["c","Cycles 7 j"],["rate","QTE 7 j"],["or","Or 7 j"],["farm","Farm 7 j"],["last","Dernière activité"]];
+function pval(p,k){ const u=PSTATS[p.id]||{}; switch(k){
+  case "pseudo": return (p.pseudo||"").toLowerCase(); case "status": return isPending(p)?0:!p.allowed?1:online(status[p.id])?3:2;
+  case "ver": return p.bot_version||""; case "c": return u.c||0; case "rate": const r=rateOf(u.q,u.f); return r===null?-1:r;
+  case "or": return orEst(u); case "farm": return u.farm_s||0; case "last": return online(status[p.id])?Date.now():+new Date(p.last_seen||0); } }
+function renderPlayers(){
+  const q=($("p-q").value||"").toLowerCase().trim();
+  const counts={}; Object.entries(PFILTERS).forEach(([k,[,f]])=>counts[k]=profiles.filter(f).length);
+  $("p-chips").innerHTML=Object.entries(PFILTERS).map(([k,[l]])=>`<button class="chip ${PF===k?"on":""}" onclick="PF='${k}';renderPlayers()">${l}<b>${counts[k]}</b></button>`).join("");
+  const on=profiles.filter(p=>online(status[p.id])).length, act=profiles.filter(active7).length;
+  $("p-kpis").innerHTML = kpi("Joueurs inscrits", profiles.length, `${act} actif(s) sur 7 jours`) + kpi("En ligne", on, `${profiles.filter(p=>online(status[p.id])&&status[p.id].running).length} en train de farmer`)
+    + kpi("En attente", counts.pending, settings&&!settings.auto_allow?"inscriptions sur validation":"inscriptions libres", counts.pending?"var(--warn)":null)
+    + kpi("Bloqués", counts.blocked) + kpi("Version ancienne", counts.old, REL?"dernière : "+esc(REL.version):"", counts.old?"var(--warn)":null);
+  let list=profiles.filter(PFILTERS[PF][1]).filter(p=>!q || [p.pseudo,p.email,p.pc_info,p.admin_note,p.bot_version].some(x=>String(x||"").toLowerCase().includes(q)));
+  list.sort((a,b)=>{ const x=pval(a,PSORT.k), y=pval(b,PSORT.k); return (x>y?1:x<y?-1:0)*PSORT.d; });
+  PLIST=list.map(p=>p.id);
+  $("p-head").innerHTML=`<tr><th style="width:28px"><input type="checkbox" class="rsa" ${PLIST.length&&PLIST.every(id=>PSEL.has(id))?"checked":""} onchange="togSelAll(this.checked)" title="Tout sélectionner"></th>${PCOLS.map(([k,l])=>`<th class="s ${PSORT.k===k?"on":""} ${["c","rate","or","farm"].includes(k)?"r":""}" onclick="sortP('${k}')">${l}${PSORT.k===k?(PSORT.d>0?" ↑":" ↓"):""}</th>`).join("")}<th></th></tr>`;
+  const pend=profiles.filter(isPending);
+  $("p-bulk").classList.toggle("hidden",!pend.length);
+  $("p-bulk").innerHTML=pend.length?`<span class="pill p-warn">${pend.length} en attente</span><span class="note">${pend.map(p=>esc(p.pseudo)).join(", ")}</span><div class="sp"></div><button class="b ok" onclick="allowAllPending()">Autoriser tous les en attente</button>`:"";
+  $("ptab").innerHTML = list.map(p => { const u=PSTATS[p.id]||{}, r=rateOf(u.q,u.f), ol=online(status[p.id]);
+    const st = isPending(p)?'<span class="pill p-warn">En attente</span>':!p.allowed?'<span class="pill p-bad">Bloqué</span>':ol?(status[p.id].running?'<span class="pill p-ok">En farm</span>':'<span class="pill p-ok">En ligne</span>'):'<span class="pill p-mut">Hors ligne</span>';
+    const dd=dups(p);
+    return `<tr>
+    <td><input type="checkbox" class="rsel" onchange="togSel('${p.id}',this.checked)" ${PSEL.has(p.id)?"checked":""}></td>
+    <td><span class="dot ${ol?"on":""}" style="margin-right:6px"></span><b class="who-l" onclick="openFiche('${p.id}')">${esc(p.pseudo||"—")}</b>${p.role==="admin"?' <span class="pill p-gold">Admin</span>':""}${enGalere(p)?' <span class="pill p-bad" data-tip="A tourné mais 0 QTE détecté — écran/config à vérifier (ex. 21:9 ultrawide)">⚠ en galère</span>':""}${dd.length?` <span class="pill p-warn" data-tip="Même PC/IP que : ${esc(dd.map(o=>o.pseudo||o.email).join(', '))}">👥 doublon?</span>`:""}${p.admin_note?`<span class="ico-note" data-tip="${esc(p.admin_note)}">✎</span>`:""}<div class="note">${gameName(p)?'🎮 '+esc(gameName(p))+' · ':''}${esc(p.pc_info||p.email||"")}</div></td>
+    <td>${st}</td>
+    <td>${isOld(p)?`<span class="pill p-warn">v${esc(p.bot_version)}</span>`:`<span class="note">v${esc(p.bot_version||"?")}</span>`}</td>
+    <td class="r num">${u.c?nf(u.c):'<span class="note">–</span>'}</td>
+    <td class="r">${r===null?'<span class="note">–</span>':`<b class="num" style="color:${rateCol(r)}">${r} %</b>`}</td>
+    <td class="r num" style="color:var(--gold)">${orEst(u)?nf(orEst(u)):'<span class="note">–</span>'}</td>
+    <td class="r note">${u.farm_s?dur(u.farm_s):"–"}</td>
+    <td class="note">${ol?"maintenant":ago(p.last_seen)}</td>
+    <td style="white-space:nowrap;text-align:right"><button class="b" onclick="editPlayer('${p.id}')">Modifier</button> ${p.id===me.id?"":`<button class="b ${p.allowed?"r":"ok"}" onclick="setAllowed('${p.id}',${!p.allowed})">${p.allowed?"Bloquer":"Autoriser"}</button>`}</td></tr>`; }).join("") || `<tr><td colspan="10" class="empty">Aucun joueur pour ce filtre.</td></tr>`;
+  renderSelBar();
+}
+function sortP(k){ PSORT = PSORT.k===k ? {k,d:-PSORT.d} : {k,d:(k==="pseudo"||k==="ver")?1:-1}; renderPlayers(); }
+$("p-q").oninput=()=>renderPlayers();
+async function allowAllPending(){
+  const ids=profiles.filter(isPending).map(p=>p.id); if(!ids.length) return;
+  if(!confirm(`Autoriser ${ids.length} joueur(s) en attente ?`)) return;
+  const {error}=await sb.from("profiles").update({allowed:true}).in("id",ids); if(error) return alert(error.message);
+  await loadProfiles(); loadPlayers();
+}
+function editPlayer(id){
+  const p=profiles.find(x=>x.id===id); if(!p) return; const F=$("fiche");
+  F.innerHTML=`<div class="card" style="max-width:520px"><div class="row"><h2 style="margin:0;font-family:Rye,serif;font-weight:400;color:var(--gold)">Modifier ${esc(p.pseudo)}</h2><div class="sp"></div><button class="b" onclick="$('fiche').classList.add('hidden')">Fermer</button></div>
+    <label class="f">Pseudo</label><input id="ed-ps" value="${esc(p.pseudo||"")}" maxlength="32" style="width:100%">
+    <label class="f">Note admin (visible par toi seul)</label><textarea id="ed-note" placeholder="Ex : Yaya = John Smith en jeu, ami de Bob">${esc(p.admin_note||"")}</textarea>
+    <label class="f">Accès</label>
+    <div class="row">${p.id===me.id?'<span class="note">C\'est ton compte administrateur.</span>':`<label class="opt ${p.allowed?"on":""}" style="flex:1;margin:0"><input type="radio" name="ed-al" value="1" ${p.allowed?"checked":""}><div><b>Autorisé</b><span class="note">peut utiliser le bot</span></div></label><label class="opt ${!p.allowed?"on":""}" style="flex:1;margin:0"><input type="radio" name="ed-al" value="0" ${!p.allowed?"checked":""}><div><b>Bloqué</b><span class="note">le bot refuse de démarrer</span></div></label>`}</div>
+    <div class="note" style="margin-top:12px">Compte : ${p.email?esc(p.email):"pseudo (sans email)"} · version ${esc(p.bot_version||"?")} · inscrit le ${new Date(p.created_at).toLocaleDateString("fr-FR")}</div>
+    ${(()=>{const dd=dups(p);return dd.length?`<div class="alert warn" style="margin-top:10px"><span class="ic">👥</span><div class="tx"><b>Doublon possible</b><span>Même PC/IP que : ${dd.map(o=>`<span class="lnk" onclick="openFiche('${o.id}')">${esc(o.pseudo||o.email)}</span>`).join(", ")}</span></div></div>`:"";})()}
+    <h3 style="margin:16px 0 0">Infos techniques</h3>${sysBlock(p)}
+    <div id="ed-history" style="margin-top:6px"><div class="note">Chargement de l'historique…</div></div>
+    <div class="err" id="ed-err"></div>
+    <div class="modal-actions">${(p.id!==me.id && p.role!=="admin")?`<button class="b" style="background:var(--bad);color:#fff;margin-right:auto" id="ed-del">Supprimer ce compte</button>`:""}<button class="b" onclick="$('fiche').classList.add('hidden')">Annuler</button><button class="b g" id="ed-go">Enregistrer</button></div></div>`;
+  F.classList.remove("hidden");
+  F.querySelectorAll('input[name="ed-al"]').forEach(r=>r.onchange=()=>F.querySelectorAll(".opt").forEach(o=>o.classList.toggle("on",o.querySelector("input").checked)));
+  $("ed-go").onclick=async()=>{
+    const ps=$("ed-ps").value.trim().replace(/\s+/g," "); if(ps.length<2) return $("ed-err").textContent="Pseudo trop court.";
+    const upd={pseudo:ps, admin_note:$("ed-note").value.trim()||null}; const al=F.querySelector('input[name="ed-al"]:checked'); if(al) upd.allowed = al.value==="1";
+    const {error}=await sb.from("profiles").update(upd).eq("id",id); if(error) return $("ed-err").textContent=error.message;
+    F.classList.add("hidden"); await loadProfiles(); fillUserSelects(); if(view==="players") loadPlayers(); else if(view==="live") renderLive();
+  };
+  const delBtn=$("ed-del"); if(delBtn) delBtn.onclick=async()=>{
+    if(!confirm("Supprimer DÉFINITIVEMENT le compte « "+(p.pseudo||p.email||"?")+" » ?\n\nCette action est irréversible.")) return;
+    delBtn.disabled=true; $("ed-err").textContent="";
+    const {error}=await sb.rpc("admin_delete_user",{p_user:id});
+    if(error){ delBtn.disabled=false; return $("ed-err").textContent=error.message; }
+    F.classList.add("hidden"); await loadProfiles(); fillUserSelects(); if(view==="players") loadPlayers(); else if(view==="live") renderLive(); else if(view==="dash") show("dash");
+  };
+  loadFicheHistory(id);
+}
+async function loadFicheHistory(id){
+  const el=$("ed-history"); if(!el) return;
+  try{
+    const [er,rp]=await Promise.all([
+      sb.from("events").select("ts,data").eq("user_id",id).eq("kind","error").order("ts",{ascending:false}).limit(5),
+      sb.from("qte_reports").select("id,ts,kind,status").eq("user_id",id).order("ts",{ascending:false}).limit(5)
+    ]);
+    const errs=er.data||[], reps=rp.data||[];
+    const eh = errs.length ? errs.map(e=>`<div class="note" style="margin:3px 0">⚠ ${ago(e.ts)} — ${esc(String((e.data&&e.data.message)||"").slice(0,120))||"erreur"}</div>`).join("") : '<div class="note">Aucune erreur récente.</div>';
+    const rh = reps.length ? reps.map(r=>`<div class="note" style="margin:3px 0"><span class="lnk" onclick="show('reports');$('rp-status').value='';setTimeout(loadReports,50)">#${r.id}</span> ${ago(r.ts)} — ${esc((RKIND[r.kind]&&RKIND[r.kind][0])||r.kind||"rapport")}${r.status==="nouveau"?' <span class="pill p-warn">nouveau</span>':""}</div>`).join("") : '<div class="note">Aucun rapport.</div>';
+    el.innerHTML = `<h3 style="margin:16px 0 4px">Dernières erreurs (24 h+)</h3>${eh}<h3 style="margin:14px 0 4px">Derniers rapports</h3>${rh}`;
+  }catch(e){ el.innerHTML='<div class="note">Historique indisponible.</div>'; }
+}
+$("p-instr").onclick=()=>{
+  const lien = (REL&&REL.url) ? REL.url : "(demande le lien de téléchargement à l'admin)";
+  const txt = `🤠 Bot Reckless — Comment démarrer\n\n1) Télécharge le bot : ${lien}\n2) Double-clique sur BotReckless.exe (un raccourci « Bot Reckless » apparaît sur ton bureau).\n3) Lance-le et choisis ton pseudo.\n4) Pour voir tes stats, clique sur « Panel en ligne » dans le bot — aucun compte ni mot de passe.\n\nUn souci ? Écris ici, on t'aide 👍`;
+  navigator.clipboard.writeText(txt).then(()=>alert("Instructions copiées ! Colle-les dans Discord.")).catch(()=>alert(txt));
+};
+$("p-csv").onclick=()=>{
+  const rows=[["Pseudo","Statut","Role","Version","PC","Email","Cycles 7j","QTE resolus 7j","QTE rates 7j","Reussite %","Farm 7j (min)","Derniere activite","Inscrit le","Note"]];
+  profiles.forEach(p=>{ const u=PSTATS[p.id]||{}; rows.push([p.pseudo,isPending(p)?"en attente":p.allowed?"autorise":"bloque",p.role,p.bot_version,p.pc_info,p.email,u.c||0,u.q||0,u.f||0,rateOf(u.q,u.f)??"",Math.round((u.farm_s||0)/60),p.last_seen||"",p.created_at,p.admin_note||""]); });
+  csvDownload(rows,"joueurs_bot_reckless.csv");
+};
+function csvDownload(rows,name){
+  const csv="﻿"+rows.map(r=>r.map(v=>{ v=String(v??""); return /[;"\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }).join(";")).join("\r\n");
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"})); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+}
+window.sortP=sortP; window.allowAllPending=allowAllPending; window.editPlayer=editPlayer; window.renderPlayers=renderPlayers;
+window.togSel=togSel; window.togSelAll=togSelAll; window.bulkSet=bulkSet; window.PSEL=PSEL;
+
+// ---------- alertes ----------
+async function renderAlerts(S, nrep){
+  const el=$("alerts"); if(!el) return;
+  if(!REL) await loadRelease();
+  await loadDecided(); pendBadge();
+  const {data:errs}=await sb.from("events").select("user_id,ts,data").eq("kind","error").gte("ts",new Date(Date.now()-86400000).toISOString()).order("ts",{ascending:false}).limit(200);
+  const A=[];
+  const pend=profiles.filter(isPending);
+  if(pend.length) A.push(["warn","⏳",`${pend.length} joueur(s) en attente de validation`, pend.map(p=>esc(p.pseudo)).join(", "), `<button class="b" onclick="PF='pending';show('players')">Valider</button>`]);
+  const byU={}; (errs||[]).forEach(e=>{ (byU[e.user_id]=byU[e.user_id]||[]).push(e); });
+  Object.entries(byU).forEach(([u,l])=>A.push(["bad","⚠",`${esc(pname(u))} : ${l.length} erreur(s) en 24 h`, esc((l[0].data&&l[0].data.message)||"").slice(0,140)+" · "+ago(l[0].ts), `<button class="b" onclick="openFiche('${u}')">Fiche</button>`]));
+  (S.users||[]).filter(u=>(u.q||0)>=20).forEach(u=>{ const r=rateOf(u.q,u.f); if(r!==null && r<90) A.push([r<75?"bad":"warn","🎯",`${esc(pname(u.u))} : ${r} % de QTE réussis`, `${nf(u.f)} ratés sur la période`, `<button class="b" onclick="openFiche('${u.u}')">Fiche</button>`]); });
+  (S.users||[]).filter(u=>(u.c||0)>=3&&(u.q||0)===0).forEach(u=>A.push(["bad","🛠️",`${esc(pname(u.u))} : farm actif mais 0 QTE détecté`, `A tourné ${nf(u.c)} cycle(s) sans résoudre un seul QTE — écran/config à vérifier (ex. 21:9 ultrawide)`, `<button class="b" onclick="openFiche('${u.u}')">Fiche</button>`]));
+  const old=profiles.filter(p=>isOld(p)&&active7(p));
+  if(old.length) A.push(["info","⬆",`${old.length} joueur(s) actif(s) sur une ancienne version`, old.map(p=>esc(p.pseudo)+" (v"+esc(p.bot_version)+")").join(", ")+" · dernière : "+esc(REL.version), `<button class="b" onclick="PF='old';show('players')">Voir</button>`]);
+  const bl=profiles.filter(p=>!p.allowed&&online(status[p.id]));
+  if(bl.length) A.push(["warn","⛔",`Bot ouvert par un joueur bloqué`, bl.map(p=>esc(p.pseudo)).join(", "), ""]);
+  if(nrep) A.push(["warn","📄",`${nrep} rapport(s) à traiter`, "QTE ratés, problèmes signalés et vérifications de config", `<button class="b" onclick="show('reports');$('rp-status').value='nouveau';loadReports()">Ouvrir</button>`]);
+  el.innerHTML = A.length ? A.map(([c,i,t,d,act])=>`<div class="alert ${c}"><span class="ic">${i}</span><div class="tx"><b>${t}</b><span>${d}</span></div>${act}</div>`).join("")
+    : `<div class="alert ok"><span class="ic">✔</span><div class="tx"><b>Tout va bien</b><span>Aucune erreur, aucun joueur en attente, tout le monde est à jour.</span></div></div>`;
+}
+
+function fillUserSelects(){
+  ["h-user","rp-user"].forEach(id=>{ const sel=$(id), cur=sel.value;
+    sel.innerHTML=`<option value="">Tous les joueurs</option>`+profiles.map(p=>`<option value="${p.id}">${esc(p.pseudo||p.email)}</option>`).join("");
+    sel.value=cur; sel.classList.toggle("hidden",!isAdm()); });
+}
+async function setAllowed(id,val){
+  const {error} = await sb.from("profiles").update({allowed:val}).eq("id",id);
+  if(error) return alert(error.message);
+  await loadProfiles(); if(view==="players") loadPlayers(); if(view==="live") renderLive(); if(view==="dash") loadDash();
+}
+window.setAllowed=setAllowed;
+
+// ---------- historique ----------
+async function loadHistory(){
+  let q = sb.from("events").select("*").order("ts",{ascending:false}).limit(300);
+  if($("h-user").value) q=q.eq("user_id",$("h-user").value);
+  if($("h-kind").value) q=q.eq("kind",$("h-kind").value);
+  if($("h-day").value){ const d=new Date($("h-day").value+"T00:00:00"); q=q.gte("ts",d.toISOString()).lt("ts",new Date(+d+86400000).toISOString()); }
+  const {data} = await q;
+  $("htab").innerHTML = (data||[]).map(e => { const k=KIND[e.kind]||[e.kind,"p-mut"]; return `<tr><td class="note" style="white-space:nowrap">${fmt(e.ts)}</td><td>${esc(pname(e.user_id))}</td><td><span class="pill ${k[1]}">${k[0]}</span></td><td>${esc(ACT[e.activity]||e.activity||"")}</td><td class="note">${details(e.data)}</td></tr>`; }).join("")
+    || `<tr><td colspan="5" class="empty">Rien pour ce filtre.</td></tr>`;
+}
+function details(d){ d=d||{}; const lab={qte:"QTE",n:"n°",duree:"durée",eau:"eau",type:"type",raison:"raison",cycles:"cycles",rates:"ratés",v:"version",retard:"retard cercle",vit:"vitesse aiguille",message:"message",mode:"mode"};
+  return Object.entries(d).map(([a,b])=>{ if(a==="types"||a==="fails") return esc((a==="types"?"résolus ":"ratés ")+Object.entries(b||{}).map(([k,n])=>(QT[k]||k)+" "+n).join(", "));
+    if(a==="type") b=QT[b]||b; if(a==="retard") b=b+" ms"; if(a==="vit") b=b+" °/s";
+    return esc((lab[a]||a)+" : "+(typeof b==="object"?JSON.stringify(b):b)); }).join(" · "); }
+["h-user","h-kind","h-day"].forEach(id=>$(id).onchange=loadHistory);
+
+// ---------- télécharger ----------
+async function loadRelease(){
+  const {data} = await sb.from("app_release").select("*").eq("id",1).maybeSingle();
+  REL=data;
+  if(data){ $("rel-info").textContent = "Version actuelle : "+data.version+" (publiée "+ago(data.updated_at)+")"+(data.notes?" — "+data.notes:""); $("dl").href=data.download_url||data.url; }
+  $("rel-admin").classList.toggle("hidden", !isAdm());
+}
+
+// ---------- annonce ----------
+let settings=null;
+const ALVL={info:["ℹ","Information"],important:["⚠","Important"],maintenance:["🛠","Maintenance"]};
+async function loadSettingsRow(){ const {data}=await sb.from("app_settings").select("*").eq("id",1).maybeSingle(); settings=data; renderBanner(); }
+function bannerHtml(t,l){ const L=ALVL[l]||ALVL.info; return `<div class="banner ${ALVL[l]?l:"info"}"><span class="ic">${L[0]}</span><div><b>${L[1]}</b>${esc(t).replace(/\n/g,"<br>")}</div></div>`; }
+function renderBanner(){ $("banner").innerHTML = settings&&settings.announce ? bannerHtml(settings.announce, settings.announce_level) : ""; }
+
+// ---------- journal admin ----------
+const LACT={inscription:["Inscription","p-gold"],autorise:["Autorisé","p-ok"],bloque:["Bloqué","p-bad"],pseudo:["Pseudo modifié","p-mut"],note:["Note","p-mut"],role:["Rôle","p-warn"],version:["Version publiée","p-gold"],inscriptions:["Mode d'inscription","p-warn"],annonce:["Annonce","p-warn"],purge:["Maintenance","p-mut"]};
+async function loadLog(){
+  let q=sb.from("admin_log").select("*").order("ts",{ascending:false}).limit(300);
+  if($("lg-act").value) q=q.eq("action",$("lg-act").value);
+  const {data,error}=await q;
+  if(error) return $("lgtab").innerHTML=`<tr><td colspan="5" class="empty">${esc(error.message)}</td></tr>`;
+  $("lgtab").innerHTML=(data||[]).map(l=>{ const k=LACT[l.action]||[l.action,"p-mut"];
+    const by = !l.admin_id ? '<span class="note">Système</span>' : l.admin_id===l.target_id ? esc(pname(l.admin_id))+' <span class="note">(lui-même)</span>' : esc(pname(l.admin_id));
+    return `<tr><td class="note" style="white-space:nowrap">${fmt(l.ts)}</td><td>${by}</td><td><span class="pill ${k[1]}">${k[0]}</span></td><td>${l.target_id?`<b class="who-l" onclick="openFiche('${l.target_id}')">${esc(pname(l.target_id))}</b>`:'<span class="note">—</span>'}</td><td class="note">${esc(l.detail||"")}</td></tr>`; }).join("")
+    || `<tr><td colspan="5" class="empty">Rien pour l'instant : les prochaines actions apparaîtront ici.</td></tr>`;
+}
+$("lg-act").onchange=loadLog;
+
+// ---------- nettoyage automatique (1 fois par jour max, lance par le panel admin) ----------
+async function cleanup(force){
+  const {data,error}=await sb.rpc("auto_cleanup",{p_force:!!force}); if(error||!data) return null;
+  const imgs=data.images||[];
+  for(let i=0;i<imgs.length;i+=100) await sb.storage.from("qte-reports").remove(imgs.slice(i,i+100));
+  return data;
+}
+async function removeReportImages(q){ const {data}=await q; const imgs=(data||[]).flatMap(r=>r.images||[]);
+  for(let i=0;i<imgs.length;i+=100) await sb.storage.from("qte-reports").remove(imgs.slice(i,i+100)); return imgs.length; }
+
+// ---------- parametres ----------
+async function loadSettings(){
+  const el=$("v-settings"); await Promise.all([loadSettingsRow(), loadRelease()]);
+  const S=settings||{auto_allow:true,announce:"",announce_level:"info"};
+  const {count:evN}=await sb.from("events").select("id",{count:"exact",head:true});
+  el.innerHTML=`<div class="grid g2">
+    <div class="card"><h3>Inscriptions des nouveaux joueurs</h3>
+      <label class="opt ${S.auto_allow?"on":""}"><input type="radio" name="st-al" value="1" ${S.auto_allow?"checked":""}><div><b>Libres</b><span class="note">Tout joueur qui tape un pseudo peut utiliser le bot tout de suite. Tu bloques ceux que tu ne connais pas.</span></div></label>
+      <label class="opt ${!S.auto_allow?"on":""}"><input type="radio" name="st-al" value="0" ${!S.auto_allow?"checked":""}><div><b>Sur validation</b><span class="note">Les nouveaux arrivent « en attente » : le bot refuse de démarrer tant que tu ne les as pas autorisés (onglet Joueurs).</span></div></label>
+      <div class="note" id="st-al-msg"></div></div>
+    <div class="card"><h3>Annonce aux joueurs</h3>
+      <textarea id="st-ann" maxlength="500" placeholder="Ex : Redémarrage du serveur à 21 h, arrêtez vos bots 5 minutes avant.">${esc(S.announce||"")}</textarea>
+      <div class="row" style="margin-top:8px"><select id="st-lvl">${Object.entries(ALVL).map(([k,[i,l]])=>`<option value="${k}" ${S.announce_level===k?"selected":""}>${i} ${l}</option>`).join("")}</select><div class="sp"></div><button class="b r" id="st-clr">Effacer</button><button class="b g" id="st-pub">Publier</button></div>
+      <p class="note">Affichée en haut du panel de tous les joueurs (et dans le bot à partir de la version 3.49).</p>
+      <div id="st-prev"></div><div class="note" id="st-ann-msg"></div></div>
+    <div class="card"><h3>Mise à jour du bot</h3>
+      <p style="margin-top:0">Version publiée : <b>${esc(REL?REL.version:"?")}</b> <span class="note">(${REL?ago(REL.updated_at):""})</span></p>
+      <p class="note">1. Ferme le bot, lance CONSTRUIRE_EXE.bat, puis sur Google Drive : BotReckless.exe → Gérer les versions → importe celui de FARM3\\dist.<br>2. Indique ici le numéro de la nouvelle version : tous les bots plus anciens proposeront la mise à jour, avec les nouveautés.</p>
+      <div class="row"><input id="rel-v" placeholder="ex : 3.49" style="width:100px"><input id="rel-n" placeholder="Nouveautés (affichées dans le bot)" style="flex:1;min-width:180px"><button class="b g" id="rel-go">Publier</button></div>
+      <div class="note" id="rel-msg" style="margin-top:8px"></div></div>
+    <div class="card"><h3>Maintenance et export</h3>
+      <p style="margin-top:0" class="note">${nf(evN||0)} événements enregistrés. <b style="color:var(--txt2)">Nettoyage automatique</b> une fois par jour (quand tu ouvres le panel) : historique de plus de 90 jours, rapports corrigés de plus de 60 jours et leurs images.${settings&&settings.last_cleanup?" Dernier : "+ago(settings.last_cleanup)+".":""}</p>
+      <div class="row" style="margin-bottom:8px"><button class="b" id="mt-auto">Nettoyer maintenant</button></div>
+      <div class="row"><select id="mt-d"><option value="90">plus de 90 jours</option><option value="60">plus de 60 jours</option><option value="30">plus de 30 jours</option></select><button class="b r" id="mt-go">Supprimer l'historique</button></div>
+      <div class="row" style="margin-top:8px"><button class="b r" id="mt-rep">Supprimer les rapports corrigés de plus de 30 jours</button></div>
+      <div class="row" style="margin-top:14px"><button class="b" id="ex-ev">Exporter l'historique 30 j (CSV)</button><button class="b" onclick="loadPlayers().then(()=>$('p-csv').click())">Exporter les joueurs (CSV)</button></div>
+      <div class="note" id="mt-msg" style="margin-top:8px"></div></div>
+  </div>`;
+  el.querySelectorAll('input[name="st-al"]').forEach(r=>r.onchange=async()=>{
+    el.querySelectorAll('input[name="st-al"]').forEach(x=>x.closest(".opt").classList.toggle("on",x.checked));
+    const v=r.value==="1"; const {error}=await sb.from("app_settings").update({auto_allow:v,updated_at:new Date().toISOString()}).eq("id",1);
+    $("st-al-msg").textContent = error?error.message:(v?"Inscriptions libres activées.":"Inscriptions sur validation activées : les prochains joueurs seront en attente."); if(!error) settings.auto_allow=v; });
+  const prev=()=>{ const t=$("st-ann").value.trim(); $("st-prev").innerHTML=t?`<label class="f">Aperçu</label>`+bannerHtml(t,$("st-lvl").value):""; };
+  $("st-ann").oninput=prev; $("st-lvl").onchange=prev; prev();
+  const saveAnn=async(t)=>{ const {error}=await sb.from("app_settings").update({announce:t||null,announce_level:$("st-lvl").value,updated_at:new Date().toISOString()}).eq("id",1);
+    $("st-ann-msg").textContent=error?error.message:(t?"Annonce publiée.":"Annonce effacée."); if(!error){ await loadSettingsRow(); if(!t){ $("st-ann").value=""; prev(); } } };
+  $("st-pub").onclick=()=>saveAnn($("st-ann").value.trim()); $("st-clr").onclick=()=>saveAnn("");
+  $("rel-go").onclick = async () => {
+    const v=$("rel-v").value.trim(), n=$("rel-n").value.trim();
+    if(!/^\d+(\.\d+)+$/.test(v)) return $("rel-msg").textContent="Numéro de version invalide (ex : 3.49).";
+    if(REL && cmpv(v,REL.version)<=0 && !confirm(`La version ${v} n'est pas plus récente que ${REL.version}. Publier quand même ?`)) return;
+    const {error} = await sb.from("app_release").update({version:v, notes:n||null, updated_at:new Date().toISOString()}).eq("id",1);
+    $("rel-msg").textContent = error ? error.message : "Version "+v+" publiée : les bots vont proposer la mise à jour.";
+    if(!error) loadSettings();
+  };
+  $("mt-go").onclick=async()=>{ const d=+$("mt-d").value, lim=new Date(Date.now()-d*86400000).toISOString();
+    const {count}=await sb.from("events").select("id",{count:"exact",head:true}).lt("ts",lim);
+    if(!count) return $("mt-msg").textContent="Rien à supprimer : aucun événement de plus de "+d+" jours.";
+    if(!confirm(`Supprimer définitivement ${nf(count)} événement(s) de plus de ${d} jours ? C'est irréversible.`)) return;
+    const {error}=await sb.from("events").delete().lt("ts",lim); $("mt-msg").textContent=error?error.message:nf(count)+" événement(s) supprimé(s)."; };
+  $("mt-rep").onclick=async()=>{ const lim=new Date(Date.now()-30*86400000).toISOString();
+    const {count}=await sb.from("qte_reports").select("id",{count:"exact",head:true}).eq("status","corrige").lt("ts",lim);
+    if(!count) return $("mt-msg").textContent="Aucun rapport corrigé de plus de 30 jours.";
+    if(!confirm(`Supprimer définitivement ${count} rapport(s) corrigé(s) de plus de 30 jours (et leurs images) ?`)) return;
+    await removeReportImages(sb.from("qte_reports").select("images").eq("status","corrige").lt("ts",lim));
+    const {error}=await sb.from("qte_reports").delete().eq("status","corrige").lt("ts",lim); $("mt-msg").textContent=error?error.message:count+" rapport(s) supprimé(s)."; };
+  $("mt-auto").onclick=async()=>{ $("mt-msg").textContent="Nettoyage…"; const d=await cleanup(true);
+    $("mt-msg").textContent = d ? `Fait : ${d.events} événement(s), ${d.reports} rapport(s), ${(d.images||[]).length} image(s) supprimés.` : "Impossible de nettoyer."; };
+  $("ex-ev").onclick=async()=>{ $("mt-msg").textContent="Préparation…"; const rows=[["Date","Joueur","Evenement","Activite","Details"]]; let from=0;
+    for(;;){ const {data}=await sb.from("events").select("*").gte("ts",new Date(Date.now()-30*86400000).toISOString()).order("ts").range(from,from+999); (data||[]).forEach(e=>rows.push([e.ts,pname(e.user_id),e.kind,e.activity||"",JSON.stringify(e.data||{})])); if(!data||data.length<1000) break; from+=1000; }
+    csvDownload(rows,"historique_30j_bot_reckless.csv"); $("mt-msg").textContent=(rows.length-1)+" événement(s) exporté(s)."; };
+}
+
+// ---------- rapports ----------
+async function loadReports(){
+  let q=sb.from("qte_reports").select("id,user_id,ts,kind,qte_type,activity,bot_version,message,status,images").order("ts",{ascending:false}).limit(100);
+  if($("rp-user").value) q=q.eq("user_id",$("rp-user").value);
+  if($("rp-kind").value) q=q.eq("kind",$("rp-kind").value);
+  if($("rp-status").value) q=q.eq("status",$("rp-status").value);
+  const {data,error}=await q;
+  if(error) return $("rp-list").innerHTML=`<p class="note">${esc(error.message)}</p>`;
+  $("rp-list").innerHTML=(data||[]).map(r=>{const k=RKIND[r.kind]||[r.kind,"p-mut"], st=RSTAT[r.status]||[r.status,"p-mut"];
+    return `<div class="card" style="background:var(--panel2);margin-bottom:10px;padding:12px">
+      <div class="row"><span class="pill ${k[1]}">${k[0]}</span><b>${esc(pname(r.user_id))}</b><span class="note">${fmt(r.ts)} · ${esc(ACT[r.activity]||r.activity||"")}${r.qte_type?" · "+esc(QT[r.qte_type]||r.qte_type):""} · v${esc(r.bot_version||"?")} · ${(r.images||[]).length} images</span><div class="sp"></div>${isAdm()?`<span class="pill ${st[1]}">${st[0]}</span>`:""}
+      <button class="b" onclick="openReport(${r.id})">Ouvrir</button></div>
+      ${r.message?`<div class="note" style="margin-top:6px">${esc(r.kind==="diagnostic"?(r.message.match(/PROBLEME[^|]*/g)||["Tout est OK"]).join(" · "):r.message)}</div>`:""}</div>`;}).join("") || `<div class="empty">Aucun rapport pour ce filtre. 👍</div>`;
+}
+["rp-user","rp-kind","rp-status"].forEach(id=>$(id).onchange=loadReports);
+async function refreshBadge(){
+  if(!isAdm()) return;
+  const {count}=await sb.from("qte_reports").select("id",{count:"exact",head:true}).eq("status","nouveau");
+  const b=$("rep-badge"); if(b){ b.textContent=count||""; b.classList.toggle("hidden",!count); }
+}
+async function openReport(id){
+  const F=$("fiche"); F.innerHTML=`<div class="card"><p class="note">Chargement…</p></div>`; F.classList.remove("hidden");
+  const {data:r,error}=await sb.from("qte_reports").select("*").eq("id",id).single();
+  if(error) return F.innerHTML=`<div class="card"><p class="note">${esc(error.message)}</p></div>`;
+  let urls=[];
+  if((r.images||[]).length){ const {data:u}=await sb.storage.from("qte-reports").createSignedUrls(r.images,3600); urls=(u||[]).map(x=>x.signedUrl); }
+  const k=RKIND[r.kind]||[r.kind,"p-mut"], adm=isAdm();
+  const qimgs=urls.filter((u,i)=>!/ecran\.jpg/.test(r.images[i])), full=urls.find((u,i)=>/ecran\.jpg/.test(r.images[i]));
+  F.innerHTML=`<div class="card">
+    <div class="row"><h2 style="margin:0;font-family:Rye,serif;font-weight:400;color:var(--gold)">Rapport #${r.id}</h2><span class="pill ${k[1]}">${k[0]}</span><div class="sp"></div>
+      ${adm?`<select id="rs-st"><option value="nouveau">À traiter</option><option value="vu">Vu</option><option value="corrige">Corrigé</option></select>`:""}
+      ${adm?`<button class="b" onclick="copyReport()">Copier pour analyse</button>`:""}
+      <button class="b" onclick="$('fiche').classList.add('hidden')">Fermer</button></div>
+    <dl class="kv" style="margin-top:12px">
+      <dt>Joueur</dt><dd>${adm?`<span class="who-l" onclick="openFiche('${r.user_id}')">${esc(pname(r.user_id))}</span>`:esc(pname(r.user_id))}</dd>
+      <dt>Date</dt><dd>${fmt(r.ts)}</dd>
+      <dt>Activité / QTE</dt><dd>${esc(ACT[r.activity]||r.activity||"—")}${r.qte_type?" · "+esc(QT[r.qte_type]||r.qte_type):""}</dd>
+      <dt>Version / PC</dt><dd>${esc(r.bot_version||"—")} · ${esc(r.pc_info||"—")}</dd>
+      <dt>Message</dt><dd>${r.kind==="diagnostic" ? (r.message||"").split(" | ").map(x=>`<div style="color:${/^PROBLEME/.test(x)?"var(--bad)":/^ATTENTION/.test(x)?"var(--warn)":"var(--ok)"}">${esc(x)}</div>`).join("") : esc(r.message||"—")}</dd>
+      ${adm?`<dt>Réglages</dt><dd class="note" style="font-family:Consolas,monospace">${esc(JSON.stringify(r.config||{}))}</dd>`:""}
+    </dl>
+    ${adm?`<div class="row" style="margin-top:10px"><input id="rs-note" placeholder="Note (ce qui a été corrigé, version…)" style="flex:1" value="${esc(r.note||"")}"><button class="b g" id="rs-save">Enregistrer</button></div>`:""}
+    ${qimgs.length?`<div class="fsec"><h4>Zone QTE (dans l'ordre, la dernière juste après l'incident)</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">${qimgs.map((u,i)=>`<a href="${u}" target="_blank" rel="noopener"><img src="${u}" style="width:100%;border-radius:6px;border:1px solid var(--line)" alt="QTE ${i+1}"><div class="note">${i+1}/${qimgs.length}</div></a>`).join("")}</div></div>`:""}
+    ${full?`<div class="fsec"><h4>Écran complet</h4><a href="${full}" target="_blank" rel="noopener"><img src="${full}" style="width:100%;border-radius:6px;border:1px solid var(--line)"></a></div>`:""}
+    <div class="fsec"><h4>Journal du bot</h4><pre style="background:var(--panel2);border-radius:8px;padding:10px;max-height:320px;overflow:auto;font-size:12px;white-space:pre-wrap">${esc(r.log_tail||"")}</pre></div>
+  </div>`;
+  window._rep=r;
+  if(adm){ $("rs-st").value=r.status;
+    const save=async()=>{ const {error}=await sb.from("qte_reports").update({status:$("rs-st").value,note:$("rs-note").value||null}).eq("id",r.id); if(error) alert(error.message); else { refreshBadge(); if(view==="reports") loadReports(); } };
+    $("rs-save").onclick=save; $("rs-st").onchange=save;
+    if(r.status==="nouveau"){ $("rs-st").value="vu"; save(); } }
+}
+function copyReport(){
+  const r=window._rep; if(!r) return;
+  const txt=`RAPPORT BOT RECKLESS #${r.id}\nType: ${r.kind} | QTE: ${r.qte_type||"?"} | Activité: ${r.activity||"?"}\nJoueur: ${pname(r.user_id)} | Version: ${r.bot_version} | PC: ${r.pc_info||"?"}\nDate: ${fmt(r.ts)}\nMessage: ${r.message||""}\nRéglages: ${JSON.stringify(r.config||{})}\n\n--- JOURNAL ---\n${r.log_tail||""}`;
+  navigator.clipboard.writeText(txt).then(()=>alert("Rapport copié : colle-le à Claude (les images restent visibles dans le panel)."));
+}
+window.openReport=openReport; window.copyReport=copyReport;
+
+// ---------- fiche joueur ----------
+async function openFiche(uid){
+  const p = profiles.find(x=>x.id===uid) || (uid===me.id?me:null); if(!p) return;
+  const s = status[uid]||{}, F=$("fiche");
+  F.innerHTML = `<div class="card"><p class="note">Chargement…</p></div>`; F.classList.remove("hidden");
+  const [S, ev, er] = await Promise.all([ stats(30, uid),
+    sb.from("events").select("*").eq("user_id",uid).order("ts",{ascending:false}).limit(15).then(r=>r.data||[]),
+    sb.from("events").select("*").eq("user_id",uid).eq("kind","error").order("ts",{ascending:false}).limit(8).then(r=>r.data||[]) ]);
+  if(!S){ F.innerHTML=`<div class="card"><p class="note">Statistiques indisponibles.</p></div>`; return; }
+  const T=S.totals, rate=rateOf(T.qte,T.fails), U=(S.users||[])[0]||{};
+  const ol=online(s);
+  const st = !p.allowed ? `<span class="pill p-bad">Bloqué</span>` : !ol ? `<span class="pill p-mut">Hors ligne</span>` : s.running ? `<span class="pill p-ok">En cours</span>` : `<span class="pill p-warn">À l'arrêt</span>`;
+  const fails=Object.entries(S.fail_types||{}).map(([k,v])=>({l:QT[k]||k,v})).sort((a,b)=>b.v-a.v);
+  const acts=Object.entries(S.acts||{}).map(([k,v])=>({l:ACT[k]||k,v}));
+  F.innerHTML = `<div class="card">
+    <div class="row"><h2 style="margin:0;font-family:Rye,serif;font-weight:400;color:var(--gold)">${esc(p.pseudo||p.email)}</h2>${st}${p.role==="admin"?'<span class="pill p-gold">Admin</span>':""}<div class="sp"></div>
+      ${isAdm()&&p.id!==me.id?`<button class="b ${p.allowed?"r":"ok"}" onclick="setAllowed('${p.id}',${!p.allowed}).then(()=>openFiche('${p.id}'))">${p.allowed?"Bloquer":"Autoriser"}</button>`:""}
+      <button class="b" onclick="$('fiche').classList.add('hidden')">Fermer</button></div>
+    <div class="fgrid">
+      <div><b>${nf(T.sessions)}</b><span>Sessions (30 j)</span></div>
+      <div><b>${dur(T.farm_s)}</b><span>Temps de farm</span></div>
+      <div><b>${nf(T.cycles)}</b><span>Cycles</span></div>
+      <div><b style="color:${rateCol(rate)}">${rate===null?"–":rate+" %"}</b><span>QTE réussis</span></div>
+      <div><b style="color:var(--bad)">${nf(T.fails)}</b><span>QTE ratés</span></div>
+      <div><b>${nf(T.fills)}</b><span>Seaux remplis</span></div>
+    </div>
+    <div class="fsec"><h4>Cycles par jour (30 jours)</h4>${vbars(fillDays(S.days,30),"cycles")}</div>
+    <div class="grid g2" style="margin-top:6px">
+      <div class="fsec"><h4>Compte et PC</h4><dl class="kv">
+        <dt>Compte</dt><dd>${p.email?esc(p.email):"Pseudo (sans email)"}</dd>
+        <dt>Inscrit le</dt><dd>${new Date(p.created_at).toLocaleDateString("fr-FR")}</dd>
+        <dt>Dernière activité</dt><dd>${ago(p.last_seen)}</dd>
+        <dt>Version du bot</dt><dd>${esc(p.bot_version||"—")}</dd>
+        <dt>PC / écran</dt><dd>${esc(p.pc_info||"—")}</dd>
+        <dt>Cercle</dt><dd>${U.retard!=null?"retard réglé "+U.retard+" ms":"—"}${U.vit!=null?" · aiguille "+U.vit+" °/s":""}</dd>
+      </dl></div>
+      <div class="fsec"><h4>QTE ratés par type</h4>${fails.length?hbars(fails,"ratés"):'<p class="note">Aucun QTE raté. 👍</p>'}
+        <h4 style="margin-top:14px">Cycles par activité</h4>${hbars(acts,"cycles")}</div>
+    </div>
+    ${isAdm()?`<div class="fsec"><h4>Rapports</h4><p class="note"><span class="lnk" onclick="$('fiche').classList.add('hidden');show('reports');$('rp-user').value='${p.id}';$('rp-status').value='';loadReports()">Voir les rapports de ${esc(p.pseudo||p.email)}</span></p></div>`:""}
+    <div class="fsec"><h4>Dernières erreurs</h4>${er.length?`<div class="tw"><table><tbody>${er.map(e=>`<tr><td class="note" style="white-space:nowrap">${fmt(e.ts)}</td><td>${esc((e.data&&e.data.message)||"")}</td></tr>`).join("")}</tbody></table></div>`:'<p class="note">Aucune erreur. 👍</p>'}</div>
+    <div class="fsec"><h4>Derniers événements</h4><div class="tw"><table><tbody>${ev.map(e=>{const k=KIND[e.kind]||[e.kind,"p-mut"];return `<tr><td class="note" style="white-space:nowrap">${fmt(e.ts)}</td><td><span class="pill ${k[1]}">${k[0]}</span></td><td class="note">${esc(ACT[e.activity]||e.activity||"")}</td><td class="note">${details(e.data)}</td></tr>`}).join("")||'<tr><td class="note">Rien.</td></tr>'}</tbody></table></div></div>
+  </div>`;
+}
+window.openFiche=openFiche; window.show=show; window.loadReports=loadReports;
+$("fiche").onclick=(e)=>{ if(e.target.id==="fiche") $("fiche").classList.add("hidden"); };
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") $("fiche").classList.add("hidden"); });
+
+// ---------- démarrage ----------
+async function boot(){
+  const {data:{session}} = await sb.auth.getSession();
+  if(/access_token=/.test(location.hash)) history.replaceState(null,"",location.pathname);
+  if(!session){ $("v-login").classList.remove("hidden"); return; }
+  const {data:p} = await sb.from("profiles").select("*").eq("id",session.user.id).single();
+  me = p || {id:session.user.id, role:"player", email:session.user.email};
+  $("v-login").classList.add("hidden"); $("app").classList.remove("hidden");
+  $("me-name").textContent = me.pseudo||me.email||"Joueur"; $("me-role").textContent = isAdm()?"Administrateur":"Joueur";
+  await Promise.all([loadProfiles(), loadStatus(), loadSettingsRow()]);
+  buildNav(); fillUserSelects(); if(isAdm()){ $("rp-status").value="nouveau"; loadDecided().then(pendBadge); }
+  show("dash"); refreshBadge();
+  sb.channel("live")
+    .on("postgres_changes",{event:"*",schema:"public",table:"bot_status"},pl=>{ if(pl.new&&pl.new.user_id) status[pl.new.user_id]=pl.new; if(view==="live") renderLive(); })
+    .on("postgres_changes",{event:"INSERT",schema:"public",table:"qte_reports"},()=>{ refreshBadge(); if(view==="reports") loadReports(); })
+    .subscribe();
+  // rafraichissement leger : toutes les 60 s, et seulement si l'onglet est visible (l'etat des bots arrive deja en direct)
+  setInterval(async()=>{ if(document.hidden) return; await loadProfiles(); loadSettingsRow(); if(view==="live") renderLive(); if(view==="players") renderPlayers(); if(view==="dash") loadDash(); if(isAdm()) pendBadge(); }, 60000);
+  document.addEventListener("visibilitychange",()=>{ if(!document.hidden && view==="dash") loadDash(); });
+  if(isAdm()) cleanup(false);
+}
+boot();
+</script>
+</body>
+</html>
