@@ -208,7 +208,7 @@ document.querySelectorAll("img.lg").forEach(i=>i.src=LOGO);
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const ACT = {orpaillage:"Orpaillage", vanille:"Vanille", frangipanier:"Frangipanier"};
+const ACT = {orpaillage:"Orpaillage", vanille:"Vanille", frangipanier:"Frangipanier", plantation:"Plantation"};
 const QT = {timing:"Cercle (Espace)", hold:"Maintien", alternate:"Alternance", sequence:"Série", "?":"Inconnu"};
 const KIND = {cycle:["Cycle terminé","p-gold"],qte_fail:["QTE raté","p-bad"],start:["Démarrage","p-ok"],stop:["Arrêt","p-mut"],fill:["Seau rempli","p-gold"],command:["Commande","p-warn"],error:["Erreur","p-bad"]};
 const RKIND={qte_rate:["QTE raté","p-bad"],qte_manquant:["QTE manquant","p-warn"],touche_inconnue:["Touche inconnue","p-warn"],timing:["Timing","p-warn"],detection:["Détection","p-warn"],manuel:["Signalé par le joueur","p-gold"],diagnostic:["Vérification config","p-mut"]};
@@ -541,9 +541,28 @@ async function allowAllPending(){
   const {error}=await sb.from("profiles").update({allowed:true}).in("id",ids); if(error) return alert(error.message);
   await loadProfiles(); loadPlayers();
 }
+const ACT_OPTS = () => Object.entries(ACT).map(([k,v])=>`<option value="${k}">${v}</option>`).join("");
+function ctrlStatus(p){ const s=status[p.id]||{}; if(!online(s)) return '<span class="pill p-mut">Hors ligne</span>'; return s.running?`<span class="pill p-ok">En cours${s.activity?" · "+esc(ACT[s.activity]||s.activity):""}</span>`:'<span class="pill p-warn">En ligne, à l\'arrêt</span>'; }
+async function sendCmd(id, cmd, arg){ const el=$("cd-res"); if(el){ el.style.color=""; el.textContent="Envoi…"; }
+  const {error}=await sb.rpc("admin_command",{p_user:id, p_cmd:cmd, p_arg:arg||null});
+  if(el){ if(error){ el.style.color="var(--bad)"; el.textContent=error.message; } else { el.style.color="var(--ok)"; el.textContent="Ordre envoyé ✓ — appliqué à la prochaine synchro du bot (~5 s)."; } } }
+function sendCmdMsg(id){ const i=$("cd-msg"); const m=((i&&i.value)||"").trim(); const el=$("cd-res"); if(!m){ if(el){ el.style.color="var(--warn)"; el.textContent="Tape un message d'abord."; } return; } sendCmd(id,"message",m).then(()=>{ if(i) i.value=""; }); }
+window.sendCmd=sendCmd; window.sendCmdMsg=sendCmdMsg;
 function editPlayer(id){
   const p=profiles.find(x=>x.id===id); if(!p) return; const F=$("fiche");
   F.innerHTML=`<div class="card" style="max-width:520px"><div class="row"><h2 style="margin:0;font-family:Rye,serif;font-weight:400;color:var(--gold)">Modifier ${esc(p.pseudo)}</h2><div class="sp"></div><button class="b" onclick="$('fiche').classList.add('hidden')">Fermer</button></div>
+    <div style="background:var(--card2);border-radius:10px;padding:12px;margin:12px 0">
+      <div class="row"><b style="color:var(--gold)">🎮 Contrôle à distance</b><div class="sp"></div>${ctrlStatus(p)}</div>
+      <div class="row" style="flex-wrap:wrap;gap:6px;margin-top:10px">
+        <button class="b ok" onclick="sendCmd('${id}','start')">▶ Démarrer</button>
+        <button class="b r" onclick="sendCmd('${id}','stop')">■ Arrêter</button>
+        <button class="b" onclick="sendCmd('${id}','restart')">↻ Redémarrer</button>
+      </div>
+      <div class="row" style="gap:6px;margin-top:8px"><select id="cd-act" style="flex:1">${ACT_OPTS()}</select><button class="b" onclick="sendCmd('${id}','activity',document.getElementById('cd-act').value)">Changer de farm</button></div>
+      <div class="row" style="gap:6px;margin-top:8px"><input id="cd-msg" placeholder="Message à afficher au joueur…" style="flex:1"><button class="b" onclick="sendCmdMsg('${id}')">Envoyer</button></div>
+      <div class="note" id="cd-res" style="margin-top:8px"></div>
+      <div class="note" style="margin-top:2px">Les ordres s'appliquent à la prochaine synchro du bot (~5 s) ; le joueur doit être en ligne.</div>
+    </div>
     <label class="f">Pseudo</label><input id="ed-ps" value="${esc(p.pseudo||"")}" maxlength="32" style="width:100%">
     <label class="f">Note admin (visible par toi seul)</label><textarea id="ed-note" placeholder="Ex : Yaya = John Smith en jeu, ami de Bob">${esc(p.admin_note||"")}</textarea>
     <label class="f">Accès</label>
@@ -555,6 +574,7 @@ function editPlayer(id){
     <div class="err" id="ed-err"></div>
     <div class="modal-actions">${(p.id!==me.id && p.role!=="admin")?`<button class="b" style="background:var(--bad);color:#fff;margin-right:auto" id="ed-del">Supprimer ce compte</button>`:""}<button class="b" onclick="$('fiche').classList.add('hidden')">Annuler</button><button class="b g" id="ed-go">Enregistrer</button></div></div>`;
   F.classList.remove("hidden");
+  const cda=$("cd-act"); if(cda){ const a=(status[id]||{}).activity; if(a && ACT[a]) cda.value=a; }
   F.querySelectorAll('input[name="ed-al"]').forEach(r=>r.onchange=()=>F.querySelectorAll(".opt").forEach(o=>o.classList.toggle("on",o.querySelector("input").checked)));
   $("ed-go").onclick=async()=>{
     const ps=$("ed-ps").value.trim().replace(/\s+/g," "); if(ps.length<2) return $("ed-err").textContent="Pseudo trop court.";
