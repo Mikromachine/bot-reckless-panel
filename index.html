@@ -202,7 +202,8 @@ label.f{display:block;color:var(--mut);font-size:12px;margin:12px 0 5px;text-tra
           <button class="b g" id="tg-new">+ Nouveau télégramme</button>
           <input id="tg-search" class="search" placeholder="Rechercher (numéro, nom, fonction, note)…" style="min-width:200px;flex:1">
           <select id="tg-fcat"><option value="">Toutes catégories</option></select>
-          <select id="tg-sort"><option value="recent">Plus récents</option><option value="prix_asc">Prix croissant</option><option value="prix_desc">Prix décroissant</option><option value="num">Numéro</option></select>
+          <select id="tg-sort"><option value="recent">Plus récents</option><option value="pop">Populaires</option><option value="prix_asc">Prix croissant</option><option value="prix_desc">Prix décroissant</option><option value="num">Numéro</option></select>
+          <label style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--mut);cursor:pointer"><input type="checkbox" id="tg-arch"> archivés</label>
           <div class="sp"></div>
           <span class="note" id="tg-count"></span>
         </div>
@@ -212,8 +213,10 @@ label.f{display:block;color:var(--mut);font-size:12px;margin:12px 0 5px;text-tra
             <input id="tg-num" placeholder="Numéro (1-6 chiffres)" maxlength="6" style="width:150px">
             <input id="tg-cat" list="tg-cats" placeholder="Catégorie" style="width:170px">
             <datalist id="tg-cats"><option>Banque</option><option>Commerce</option><option>Forgeron</option><option>Médecin</option><option>Écurie</option><option>Chasse</option><option>Taverne</option><option>Autre</option></datalist>
-            <input id="tg-prix" placeholder="Prix (ex : 0,12)" style="width:120px">
-            <input id="tg-fonction" placeholder="Fonction / métier" style="width:190px">
+            <input id="tg-prix" placeholder="Prix (ex : 0,12)" style="width:110px">
+            <input id="tg-lieu" placeholder="Lieu (ville)" style="width:140px">
+            <select id="tg-type"><option value="">Type…</option><option>achat</option><option>vente</option><option>service</option></select>
+            <input id="tg-fonction" placeholder="Fonction / métier" style="width:180px">
             <input id="tg-prenom" placeholder="Prénom" style="width:140px">
             <input id="tg-nom" placeholder="Nom" style="width:140px">
             <input id="tg-note" placeholder="Note" style="flex:1;min-width:200px">
@@ -354,15 +357,17 @@ async function loadTelegrams(){
 function tgPrixTxt(p){ return (p===null||p===undefined)?"":String(p).replace(".",","); }
 function applyTg(){
   const q=($("tg-search").value||"").toLowerCase().trim();
-  const cat=$("tg-fcat").value, sort=$("tg-sort").value;
+  const cat=$("tg-fcat").value, sort=$("tg-sort").value, showArch=$("tg-arch").checked;
   let rows=TG.filter(t=>{
+    if(!showArch && t.archived) return false;
     if(cat && t.categorie!==cat) return false;
     if(!q) return true;
-    return [t.numero,t.prenom,t.nom,t.fonction,t.note,t.categorie].filter(Boolean).join(" ").toLowerCase().includes(q);
+    return [t.numero,t.prenom,t.nom,t.fonction,t.note,t.categorie,t.lieu,t.type].filter(Boolean).join(" ").toLowerCase().includes(q);
   });
   rows.sort((a,b)=>{
     if(!!b.is_pinned!==!!a.is_pinned) return (b.is_pinned?1:0)-(a.is_pinned?1:0);
     if(sort==="num") return String(a.numero).localeCompare(String(b.numero),undefined,{numeric:true});
+    if(sort==="pop") return (b.pin_count||0)-(a.pin_count||0);
     if(sort==="prix_asc"||sort==="prix_desc"){ const pa=a.prix,pb=b.prix; if(pa==null&&pb==null) return 0; if(pa==null) return 1; if(pb==null) return -1; return sort==="prix_asc"?pa-pb:pb-pa; }
     return (b.created_at||"").localeCompare(a.created_at||"");
   });
@@ -373,34 +378,45 @@ function applyTg(){
 }
 function tgRow(t){
   const bs="font-size:12px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;margin-left:8px";
+  const op=t.archived?"opacity:.55;":"";
   const vis = !t.is_public?`<span style="${bs};color:var(--mut)">🔒 privé</span>`:`<span style="${bs};color:var(--ok)">📢 ${t.is_mine?"public":esc(t.owner_pseudo||"public")}</span>`;
   const cat = t.categorie?`<span style="${bs};color:var(--gold)">${esc(t.categorie)}</span>`:"";
+  const typ = t.type?`<span style="${bs};color:var(--txt)">${esc(t.type)}</span>`:"";
+  const lieu = t.lieu?`<span style="${bs};color:var(--mut)">📍 ${esc(t.lieu)}</span>`:"";
+  const pop = (t.pin_count>0)?`<span style="${bs};color:var(--gold)" title="Favori de ${t.pin_count} joueur(s)">⭐ ${t.pin_count}</span>`:"";
+  const arch = t.archived?`<span style="${bs};color:var(--bad)">archivé</span>`:"";
   const prix = (t.prix!=null)?`<b style="color:var(--ok);margin-left:10px">${esc(tgPrixTxt(t.prix))}</b>`:"";
   const name=[t.prenom,t.nom].filter(Boolean).map(esc).join(" ");
   const fonction=t.fonction?((name?" · ":"")+esc(t.fonction)):"";
   const bb="padding:4px 9px;font-size:13px;line-height:1";
   let act=`<button class="b" style="${bb}" title="Épingler en favori" onclick="pinTelegram(${t.id},${t.is_pinned?"false":"true"})">${t.is_pinned?"★":"☆"}</button>`;
   act+=`<button class="b" style="${bb}" title="Copier le numéro" onclick="copyNum('${esc(t.numero)}')">📋</button>`;
+  act+=`<button class="b" style="${bb}" title="Partager (copier le texte)" onclick="shareTg(${t.id})">↗</button>`;
+  act+=`<button class="b" style="${bb}" title="Ma note privée" onclick="setTgNote(${t.id})">📝</button>`;
+  if(t.prix!=null) act+=`<button class="b" style="${bb}" title="Historique des prix" onclick="priceHist(${t.id})">💰</button>`;
   if(t.is_mine){
     act+=`<button class="b" style="${bb}" title="Modifier" onclick="tgEdit(${t.id})">✏️</button>`;
     act+=`<button class="b" style="${bb}" title="${t.is_public?"Rendre privé":"Rendre public"}" onclick="togglePublic(${t.id},${t.is_public?"false":"true"})">🔁</button>`;
+    act+=`<button class="b" style="${bb}" title="${t.archived?"Désarchiver":"Archiver"}" onclick="toggleArch(${t.id},${t.archived?"false":"true"})">${t.archived?"♻":"🗄"}</button>`;
     act+=`<button class="b" style="${bb}" title="Supprimer" onclick="delTelegram(${t.id})">🗑</button>`;
   }
-  return `<div class="card" style="margin-bottom:10px;padding:12px 14px">
-    <div class="row" style="align-items:center;flex-wrap:wrap;gap:4px"><b style="color:var(--gold);font-size:18px">#${esc(t.numero)}</b>${cat}${vis}${prix}<div class="sp"></div>${act}</div>
+  return `<div class="card" style="margin-bottom:10px;padding:12px 14px;${op}">
+    <div class="row" style="align-items:center;flex-wrap:wrap;gap:4px"><b style="color:var(--gold);font-size:18px">#${esc(t.numero)}</b>${cat}${typ}${lieu}${vis}${pop}${arch}${prix}<div class="sp"></div>${act}</div>
     ${(name||fonction)?`<div style="margin-top:4px">${name}${fonction}</div>`:""}
     ${t.note?`<div class="note" style="margin-top:4px">${esc(t.note)}</div>`:""}
+    ${t.my_note?`<div style="margin-top:4px;font-style:italic;color:var(--gold)">📝 ${esc(t.my_note)}</div>`:""}
+    <div id="ph-${t.id}"></div>
   </div>`;
 }
-function tgNew(){ $("tg-id").value=""; ["tg-num","tg-cat","tg-prix","tg-fonction","tg-prenom","tg-nom","tg-note"].forEach(i=>$(i).value=""); $("tg-public").checked=false; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); $("tg-num").focus(); }
-function tgEdit(id){ const t=TG.find(x=>x.id===id); if(!t) return; $("tg-id").value=t.id; $("tg-num").value=t.numero||""; $("tg-cat").value=t.categorie||""; $("tg-prix").value=tgPrixTxt(t.prix); $("tg-fonction").value=t.fonction||""; $("tg-prenom").value=t.prenom||""; $("tg-nom").value=t.nom||""; $("tg-note").value=t.note||""; $("tg-public").checked=!!t.is_public; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); window.scrollTo(0,0); }
+function tgNew(){ $("tg-id").value=""; ["tg-num","tg-cat","tg-prix","tg-lieu","tg-type","tg-fonction","tg-prenom","tg-nom","tg-note"].forEach(i=>$(i).value=""); $("tg-public").checked=false; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); $("tg-num").focus(); }
+function tgEdit(id){ const t=TG.find(x=>x.id===id); if(!t) return; $("tg-id").value=t.id; $("tg-num").value=t.numero||""; $("tg-cat").value=t.categorie||""; $("tg-prix").value=tgPrixTxt(t.prix); $("tg-lieu").value=t.lieu||""; $("tg-type").value=t.type||""; $("tg-fonction").value=t.fonction||""; $("tg-prenom").value=t.prenom||""; $("tg-nom").value=t.nom||""; $("tg-note").value=t.note||""; $("tg-public").checked=!!t.is_public; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); window.scrollTo(0,0); }
 async function saveTelegram(){
   const num=($("tg-num").value||"").trim();
   if(!/^[0-9]{1,6}$/.test(num)){ $("tg-err").textContent="Le numéro doit faire 1 à 6 chiffres."; return; }
   let prix=null; const pr=($("tg-prix").value||"").trim().replace(",",".");
   if(pr!==""){ const n=Number(pr); if(isNaN(n)){ $("tg-err").textContent="Le prix doit être un nombre (ex : 0,12)."; return; } prix=n; }
   $("tg-err").textContent="";
-  const body={numero:num, categorie:$("tg-cat").value.trim()||null, prix, fonction:$("tg-fonction").value.trim()||null, prenom:$("tg-prenom").value.trim()||null, nom:$("tg-nom").value.trim()||null, note:$("tg-note").value.trim()||null, is_public:$("tg-public").checked};
+  const body={numero:num, categorie:$("tg-cat").value.trim()||null, prix, lieu:$("tg-lieu").value.trim()||null, type:$("tg-type").value||null, fonction:$("tg-fonction").value.trim()||null, prenom:$("tg-prenom").value.trim()||null, nom:$("tg-nom").value.trim()||null, note:$("tg-note").value.trim()||null, is_public:$("tg-public").checked};
   const id=$("tg-id").value;
   const {error}= id ? await sb.from("telegrams").update(body).eq("id",id) : await sb.from("telegrams").insert(body);
   if(error){ $("tg-err").textContent=error.message; return; }
@@ -408,10 +424,14 @@ async function saveTelegram(){
 }
 async function delTelegram(id){ if(!confirm("Supprimer ce télégramme ?")) return; const {error}=await sb.from("telegrams").delete().eq("id",id); if(error) return alert(error.message); loadTelegrams(); }
 async function togglePublic(id,val){ const {error}=await sb.from("telegrams").update({is_public:val}).eq("id",id); if(error) return alert(error.message); loadTelegrams(); }
+async function toggleArch(id,val){ const {error}=await sb.from("telegrams").update({archived:val}).eq("id",id); if(error) return alert(error.message); loadTelegrams(); }
 async function pinTelegram(id,on){ let r; if(on){ r=await sb.from("telegram_pins").insert({telegram_id:id}); } else { r=await sb.from("telegram_pins").delete().eq("telegram_id",id); } if(r.error) return alert(r.error.message); loadTelegrams(); }
+async function setTgNote(id){ const t=TG.find(x=>x.id===id)||{}; const v=prompt("Ta note privée sur ce contact (visible de toi seul) :", t.my_note||""); if(v===null) return; const {error}=await sb.rpc("telegram_set_note",{p_id:id,p_note:v}); if(error) return alert(error.message); loadTelegrams(); }
+async function priceHist(id){ const box=$("ph-"+id); if(!box) return; if(box.innerHTML){ box.innerHTML=""; return; } box.innerHTML='<p class="note">Chargement…</p>'; const {data,error}=await sb.rpc("telegram_prices",{p_id:id}); if(error){ box.innerHTML=`<p class="note" style="color:var(--bad)">${esc(error.message)}</p>`; return; } const rows=data||[]; if(!rows.length){ box.innerHTML='<p class="note">Aucun historique de prix.</p>'; return; } box.innerHTML='<div class="note" style="margin-top:6px">Historique des prix :<br>'+rows.map(r=>`${esc(tgPrixTxt(r.prix))} — ${new Date(r.at).toLocaleDateString("fr-FR",{day:"2-digit",month:"2-digit",year:"2-digit"})}`).join("<br>")+'</div>'; }
 async function copyNum(num){ try{ await navigator.clipboard.writeText(num); $("tg-count").textContent="Numéro "+num+" copié !"; setTimeout(applyTg,1200); }catch(e){ prompt("Numéro :", num); } }
-if($("tg-new")){ $("tg-new").onclick=tgNew; $("tg-cancel").onclick=()=>{$("tg-form").classList.add("hidden");$("tg-err").textContent="";}; $("tg-save").onclick=saveTelegram; $("tg-search").oninput=applyTg; $("tg-fcat").onchange=applyTg; $("tg-sort").onchange=applyTg; }
-window.delTelegram=delTelegram; window.togglePublic=togglePublic; window.pinTelegram=pinTelegram; window.copyNum=copyNum; window.tgEdit=tgEdit; window.loadTelegrams=loadTelegrams;
+async function shareTg(id){ const t=TG.find(x=>x.id===id); if(!t) return; let s="📞 #"+t.numero; const nm=[t.prenom,t.nom].filter(Boolean).join(" "); if(nm) s+=" — "+nm; if(t.fonction) s+=" — "+t.fonction; if(t.lieu) s+=" — 📍"+t.lieu; if(t.prix!=null) s+=" — "+tgPrixTxt(t.prix); if(t.note) s+=" ("+t.note+")"; try{ await navigator.clipboard.writeText(s); $("tg-count").textContent="Texte copié !"; setTimeout(applyTg,1400);}catch(e){ prompt("À partager :", s); } }
+if($("tg-new")){ $("tg-new").onclick=tgNew; $("tg-cancel").onclick=()=>{$("tg-form").classList.add("hidden");$("tg-err").textContent="";}; $("tg-save").onclick=saveTelegram; $("tg-search").oninput=applyTg; $("tg-fcat").onchange=applyTg; $("tg-sort").onchange=applyTg; $("tg-arch").onchange=applyTg; }
+window.delTelegram=delTelegram; window.togglePublic=togglePublic; window.toggleArch=toggleArch; window.pinTelegram=pinTelegram; window.copyNum=copyNum; window.tgEdit=tgEdit; window.shareTg=shareTg; window.setTgNote=setTgNote; window.priceHist=priceHist; window.loadTelegrams=loadTelegrams;
 
 function fillDays(days, n){
   const out=[], map={}; (days||[]).forEach(d=>map[d.d]=d);
