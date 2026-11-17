@@ -198,18 +198,25 @@ label.f{display:block;color:var(--mut);font-size:12px;margin:12px 0 5px;text-tra
     </section>
     <section id="v-telegrams">
       <div class="card">
-        <div class="row" style="margin-bottom:12px">
+        <div class="row" style="margin-bottom:12px;gap:10px;flex-wrap:wrap;align-items:center">
           <button class="b g" id="tg-new">+ Nouveau télégramme</button>
+          <input id="tg-search" class="search" placeholder="Rechercher (numéro, nom, fonction, note)…" style="min-width:200px;flex:1">
+          <select id="tg-fcat"><option value="">Toutes catégories</option></select>
+          <select id="tg-sort"><option value="recent">Plus récents</option><option value="prix_asc">Prix croissant</option><option value="prix_desc">Prix décroissant</option><option value="num">Numéro</option></select>
           <div class="sp"></div>
           <span class="note" id="tg-count"></span>
         </div>
         <div id="tg-form" class="hidden" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px">
+          <input type="hidden" id="tg-id">
           <div class="row" style="gap:10px;flex-wrap:wrap">
             <input id="tg-num" placeholder="Numéro (1-6 chiffres)" maxlength="6" style="width:150px">
-            <input id="tg-fonction" placeholder="Fonction / métier" style="width:210px">
-            <input id="tg-prenom" placeholder="Prénom" style="width:150px">
-            <input id="tg-nom" placeholder="Nom" style="width:150px">
-            <input id="tg-note" placeholder="Note" style="flex:1;min-width:220px">
+            <input id="tg-cat" list="tg-cats" placeholder="Catégorie" style="width:170px">
+            <datalist id="tg-cats"><option>Banque</option><option>Commerce</option><option>Forgeron</option><option>Médecin</option><option>Écurie</option><option>Chasse</option><option>Taverne</option><option>Autre</option></datalist>
+            <input id="tg-prix" placeholder="Prix (ex : 0,12)" style="width:120px">
+            <input id="tg-fonction" placeholder="Fonction / métier" style="width:190px">
+            <input id="tg-prenom" placeholder="Prénom" style="width:140px">
+            <input id="tg-nom" placeholder="Nom" style="width:140px">
+            <input id="tg-note" placeholder="Note" style="flex:1;min-width:200px">
           </div>
           <div class="row" style="margin-top:12px;align-items:center">
             <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="tg-public"> Public (visible par tous les joueurs)</label>
@@ -332,45 +339,79 @@ async function loadStatus(){ const {data} = await sb.from("bot_status").select("
 async function stats(days, uid){ const {data,error} = await sb.rpc("panel_stats",{p_days:days, p_user:uid||null}); if(error){ console.error(error); return null; } return data; }
 
 // ---------- télégrammes (carnet d'adresses) ----------
+let TG=[];
 async function loadTelegrams(){
   const list=$("tg-list"); if(!list) return; list.innerHTML='<p class="note">Chargement…</p>';
   const {data,error}=await sb.rpc("telegrams_list");
   if(error){ list.innerHTML=`<p class="note" style="color:var(--bad)">Erreur : ${esc(error.message)}</p>`; return; }
-  const rows=data||[]; $("tg-count").textContent=rows.length+" télégramme(s)";
-  if(!rows.length){ list.innerHTML='<p class="note">Aucun télégramme pour l\'instant. Ajoute le premier avec le bouton ci-dessus.</p>'; return; }
-  const badgeStyle="font-size:12px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;margin-left:8px";
-  list.innerHTML=rows.map(t=>{
-    const badge = !t.is_public
-      ? `<span style="${badgeStyle};color:var(--mut)">🔒 privé</span>`
-      : `<span style="${badgeStyle};color:var(--ok)">📢 ${t.is_mine?"public":esc(t.owner_pseudo||"public")}</span>`;
-    const name=[t.prenom,t.nom].filter(Boolean).map(esc).join(" ");
-    const fonction=t.fonction?((name?" · ":"")+esc(t.fonction)):"";
-    const del=t.is_mine?`<button class="b" style="padding:4px 10px;font-size:12px" onclick="delTelegram(${t.id})">Supprimer</button>`:"";
-    return `<div class="card" style="margin-bottom:10px;padding:12px 14px">
-      <div class="row" style="align-items:center"><b style="color:var(--gold);font-size:18px">#${esc(t.numero)}</b>${badge}<div class="sp"></div>${del}</div>
-      ${(name||fonction)?`<div style="margin-top:4px">${name}${fonction}</div>`:""}
-      ${t.note?`<div class="note" style="margin-top:4px">${esc(t.note)}</div>`:""}
-    </div>`;
-  }).join("");
+  TG=data||[];
+  const cats=[...new Set(TG.map(t=>t.categorie).filter(Boolean))].sort();
+  const sel=$("tg-fcat"), cur=sel.value;
+  sel.innerHTML='<option value="">Toutes catégories</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join("");
+  sel.value=cur;
+  applyTg();
 }
-async function addTelegram(){
+function tgPrixTxt(p){ return (p===null||p===undefined)?"":String(p).replace(".",","); }
+function applyTg(){
+  const q=($("tg-search").value||"").toLowerCase().trim();
+  const cat=$("tg-fcat").value, sort=$("tg-sort").value;
+  let rows=TG.filter(t=>{
+    if(cat && t.categorie!==cat) return false;
+    if(!q) return true;
+    return [t.numero,t.prenom,t.nom,t.fonction,t.note,t.categorie].filter(Boolean).join(" ").toLowerCase().includes(q);
+  });
+  rows.sort((a,b)=>{
+    if(!!b.is_pinned!==!!a.is_pinned) return (b.is_pinned?1:0)-(a.is_pinned?1:0);
+    if(sort==="num") return String(a.numero).localeCompare(String(b.numero),undefined,{numeric:true});
+    if(sort==="prix_asc"||sort==="prix_desc"){ const pa=a.prix,pb=b.prix; if(pa==null&&pb==null) return 0; if(pa==null) return 1; if(pb==null) return -1; return sort==="prix_asc"?pa-pb:pb-pa; }
+    return (b.created_at||"").localeCompare(a.created_at||"");
+  });
+  $("tg-count").textContent=rows.length+" télégramme(s)";
+  const list=$("tg-list");
+  if(!rows.length){ list.innerHTML='<p class="note">Aucun télégramme. Ajoute le premier avec le bouton ci-dessus.</p>'; return; }
+  list.innerHTML=rows.map(tgRow).join("");
+}
+function tgRow(t){
+  const bs="font-size:12px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;margin-left:8px";
+  const vis = !t.is_public?`<span style="${bs};color:var(--mut)">🔒 privé</span>`:`<span style="${bs};color:var(--ok)">📢 ${t.is_mine?"public":esc(t.owner_pseudo||"public")}</span>`;
+  const cat = t.categorie?`<span style="${bs};color:var(--gold)">${esc(t.categorie)}</span>`:"";
+  const prix = (t.prix!=null)?`<b style="color:var(--ok);margin-left:10px">${esc(tgPrixTxt(t.prix))}</b>`:"";
+  const name=[t.prenom,t.nom].filter(Boolean).map(esc).join(" ");
+  const fonction=t.fonction?((name?" · ":"")+esc(t.fonction)):"";
+  const bb="padding:4px 9px;font-size:13px;line-height:1";
+  let act=`<button class="b" style="${bb}" title="Épingler en favori" onclick="pinTelegram(${t.id},${t.is_pinned?"false":"true"})">${t.is_pinned?"★":"☆"}</button>`;
+  act+=`<button class="b" style="${bb}" title="Copier le numéro" onclick="copyNum('${esc(t.numero)}')">📋</button>`;
+  if(t.is_mine){
+    act+=`<button class="b" style="${bb}" title="Modifier" onclick="tgEdit(${t.id})">✏️</button>`;
+    act+=`<button class="b" style="${bb}" title="${t.is_public?"Rendre privé":"Rendre public"}" onclick="togglePublic(${t.id},${t.is_public?"false":"true"})">🔁</button>`;
+    act+=`<button class="b" style="${bb}" title="Supprimer" onclick="delTelegram(${t.id})">🗑</button>`;
+  }
+  return `<div class="card" style="margin-bottom:10px;padding:12px 14px">
+    <div class="row" style="align-items:center;flex-wrap:wrap;gap:4px"><b style="color:var(--gold);font-size:18px">#${esc(t.numero)}</b>${cat}${vis}${prix}<div class="sp"></div>${act}</div>
+    ${(name||fonction)?`<div style="margin-top:4px">${name}${fonction}</div>`:""}
+    ${t.note?`<div class="note" style="margin-top:4px">${esc(t.note)}</div>`:""}
+  </div>`;
+}
+function tgNew(){ $("tg-id").value=""; ["tg-num","tg-cat","tg-prix","tg-fonction","tg-prenom","tg-nom","tg-note"].forEach(i=>$(i).value=""); $("tg-public").checked=false; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); $("tg-num").focus(); }
+function tgEdit(id){ const t=TG.find(x=>x.id===id); if(!t) return; $("tg-id").value=t.id; $("tg-num").value=t.numero||""; $("tg-cat").value=t.categorie||""; $("tg-prix").value=tgPrixTxt(t.prix); $("tg-fonction").value=t.fonction||""; $("tg-prenom").value=t.prenom||""; $("tg-nom").value=t.nom||""; $("tg-note").value=t.note||""; $("tg-public").checked=!!t.is_public; $("tg-err").textContent=""; $("tg-form").classList.remove("hidden"); window.scrollTo(0,0); }
+async function saveTelegram(){
   const num=($("tg-num").value||"").trim();
   if(!/^[0-9]{1,6}$/.test(num)){ $("tg-err").textContent="Le numéro doit faire 1 à 6 chiffres."; return; }
+  let prix=null; const pr=($("tg-prix").value||"").trim().replace(",",".");
+  if(pr!==""){ const n=Number(pr); if(isNaN(n)){ $("tg-err").textContent="Le prix doit être un nombre (ex : 0,12)."; return; } prix=n; }
   $("tg-err").textContent="";
-  const body={numero:num, fonction:$("tg-fonction").value.trim()||null, prenom:$("tg-prenom").value.trim()||null, nom:$("tg-nom").value.trim()||null, note:$("tg-note").value.trim()||null, is_public:$("tg-public").checked};
-  const {error}=await sb.from("telegrams").insert(body);
+  const body={numero:num, categorie:$("tg-cat").value.trim()||null, prix, fonction:$("tg-fonction").value.trim()||null, prenom:$("tg-prenom").value.trim()||null, nom:$("tg-nom").value.trim()||null, note:$("tg-note").value.trim()||null, is_public:$("tg-public").checked};
+  const id=$("tg-id").value;
+  const {error}= id ? await sb.from("telegrams").update(body).eq("id",id) : await sb.from("telegrams").insert(body);
   if(error){ $("tg-err").textContent=error.message; return; }
-  ["tg-num","tg-fonction","tg-prenom","tg-nom","tg-note"].forEach(i=>$(i).value=""); $("tg-public").checked=false;
   $("tg-form").classList.add("hidden"); loadTelegrams();
 }
-async function delTelegram(id){
-  if(!confirm("Supprimer ce télégramme ?")) return;
-  const {error}=await sb.from("telegrams").delete().eq("id",id);
-  if(error) return alert(error.message);
-  loadTelegrams();
-}
-if($("tg-new")){ $("tg-new").onclick=()=>$("tg-form").classList.toggle("hidden"); $("tg-cancel").onclick=()=>{$("tg-form").classList.add("hidden");$("tg-err").textContent="";}; $("tg-save").onclick=addTelegram; }
-window.delTelegram=delTelegram; window.loadTelegrams=loadTelegrams;
+async function delTelegram(id){ if(!confirm("Supprimer ce télégramme ?")) return; const {error}=await sb.from("telegrams").delete().eq("id",id); if(error) return alert(error.message); loadTelegrams(); }
+async function togglePublic(id,val){ const {error}=await sb.from("telegrams").update({is_public:val}).eq("id",id); if(error) return alert(error.message); loadTelegrams(); }
+async function pinTelegram(id,on){ let r; if(on){ r=await sb.from("telegram_pins").insert({telegram_id:id}); } else { r=await sb.from("telegram_pins").delete().eq("telegram_id",id); } if(r.error) return alert(r.error.message); loadTelegrams(); }
+async function copyNum(num){ try{ await navigator.clipboard.writeText(num); $("tg-count").textContent="Numéro "+num+" copié !"; setTimeout(applyTg,1200); }catch(e){ prompt("Numéro :", num); } }
+if($("tg-new")){ $("tg-new").onclick=tgNew; $("tg-cancel").onclick=()=>{$("tg-form").classList.add("hidden");$("tg-err").textContent="";}; $("tg-save").onclick=saveTelegram; $("tg-search").oninput=applyTg; $("tg-fcat").onchange=applyTg; $("tg-sort").onchange=applyTg; }
+window.delTelegram=delTelegram; window.togglePublic=togglePublic; window.pinTelegram=pinTelegram; window.copyNum=copyNum; window.tgEdit=tgEdit; window.loadTelegrams=loadTelegrams;
 
 function fillDays(days, n){
   const out=[], map={}; (days||[]).forEach(d=>map[d.d]=d);
