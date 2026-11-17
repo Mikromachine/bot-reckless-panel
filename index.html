@@ -196,6 +196,32 @@ label.f{display:block;color:var(--mut);font-size:12px;margin:12px 0 5px;text-tra
       </div>
       <p id="rel-admin" class="note hidden" style="margin-top:16px">Pour publier une nouvelle version : <span class="lnk" onclick="show('settings')">Paramètres → Mise à jour du bot</span>.</p>
     </section>
+    <section id="v-telegrams">
+      <div class="card">
+        <div class="row" style="margin-bottom:12px">
+          <button class="b g" id="tg-new">+ Nouveau télégramme</button>
+          <div class="sp"></div>
+          <span class="note" id="tg-count"></span>
+        </div>
+        <div id="tg-form" class="hidden" style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px">
+          <div class="row" style="gap:10px;flex-wrap:wrap">
+            <input id="tg-num" placeholder="Numéro (1-6 chiffres)" maxlength="6" style="width:150px">
+            <input id="tg-fonction" placeholder="Fonction / métier" style="width:210px">
+            <input id="tg-prenom" placeholder="Prénom" style="width:150px">
+            <input id="tg-nom" placeholder="Nom" style="width:150px">
+            <input id="tg-note" placeholder="Note" style="flex:1;min-width:220px">
+          </div>
+          <div class="row" style="margin-top:12px;align-items:center">
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="tg-public"> Public (visible par tous les joueurs)</label>
+            <div class="sp"></div>
+            <span class="note" id="tg-err" style="color:var(--bad)"></span>
+            <button class="b" id="tg-cancel">Annuler</button>
+            <button class="b g" id="tg-save">Enregistrer</button>
+          </div>
+        </div>
+        <div id="tg-list"></div>
+      </div>
+    </section>
   </main>
 </div>
 <div id="fiche" class="hidden"></div>
@@ -223,7 +249,8 @@ const ICO = {
   reports:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/>',
   download:'<path d="M5 20h14v-2H5zm14-11h-4V3H9v6H5l7 7z"/>',
   log:'<path d="M4 4h16v2H4zm0 5h10v2H4zm0 5h16v2H4zm0 5h10v2H4zm13-9l4 3-4 3z"/>',
-  settings:'<path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 00-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/>'
+  settings:'<path d="M19.4 13a7.5 7.5 0 000-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 00-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 00-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 000 2l-2.1 1.6 2 3.5 2.5-1c.5.4 1.1.7 1.7 1L11 21h4l.4-2.7c.6-.3 1.2-.6 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 110-7 3.5 3.5 0 010 7z"/>',
+  telegrams:'<path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2zm6 4a2.3 2.3 0 110 4.6A2.3 2.3 0 0112 6zm-4 9.2c0-1.6 2.7-2.4 4-2.4s4 .8 4 2.4v.8H8zM2 6h2v2H2zm0 4h2v2H2zm0 4h2v2H2z"/>'
 };
 let me=null, profiles=[], status={}, view="dash", DAYS=7, STATS=null, REL=null;
 $("dl").href = DOWNLOAD_URL;
@@ -275,12 +302,13 @@ const VIEWS = {
   history:{t:()=>"Historique", s:()=>"Tous les événements envoyés par les bots"},
   reports:{t:()=>isAdm()?"Rapports":"Mes rapports", s:()=>isAdm()?"QTE ratés, problèmes signalés et vérifications de config":"Tes vérifications de config et problèmes signalés"},
   download:{t:()=>"Télécharger", s:()=>"Le bot et ses mises à jour"},
+  telegrams:{t:()=>"Télégrammes", s:()=>"Carnet d'adresses du serveur : les contacts publics, et ton carnet privé perso"},
   log:{t:()=>"Journal admin", s:()=>"Qui a fait quoi : inscriptions, blocages, versions, annonces", adm:true},
   settings:{t:()=>"Paramètres", s:()=>"Inscriptions, annonce aux joueurs, mises à jour et maintenance", adm:true}
 };
-const NAV_LBL = {dash:()=>isAdm()?"Tableau de bord":"Mon espace", live:()=>"En direct", qte:()=>"Analyse QTE", rank:()=>"Classement", players:()=>"Joueurs", history:()=>"Historique", reports:()=>isAdm()?"Rapports":"Mes rapports", download:()=>"Télécharger", log:()=>"Journal admin", settings:()=>"Paramètres"};
+const NAV_LBL = {dash:()=>isAdm()?"Tableau de bord":"Mon espace", live:()=>"En direct", qte:()=>"Analyse QTE", rank:()=>"Classement", players:()=>"Joueurs", history:()=>"Historique", reports:()=>isAdm()?"Rapports":"Mes rapports", download:()=>"Télécharger", telegrams:()=>"Télégrammes", log:()=>"Journal admin", settings:()=>"Paramètres"};
 function buildNav(){
-  const order = isAdm() ? ["dash","live","players","qte","rank","sep","reports","history","log","settings","download"] : ["dash","rank","history","reports","download"];
+  const order = isAdm() ? ["dash","live","players","qte","rank","sep","reports","history","telegrams","log","settings","download"] : ["dash","rank","history","reports","telegrams","download"];
   $("nav").innerHTML = order.map(v => v==="sep" ? '<div class="navsep"></div>' :
     `<button data-v="${v}"><svg viewBox="0 0 24 24" fill="currentColor">${ICO[v]}</svg><span class="lbl">${NAV_LBL[v]()}</span>${v==="reports"?'<span class="badge hidden" id="rep-badge"></span>':v==="players"?'<span class="badge hidden" id="pend-badge"></span>':""}</button>`).join("");
   document.querySelectorAll("#nav button").forEach(b => b.onclick = () => show(b.dataset.v));
@@ -294,7 +322,7 @@ function show(v){
   $("title").textContent=V.t(); $("subtitle").textContent=V.s(); $("period").classList.toggle("hidden",!V.period);
   if(v==="dash") loadDash(); if(v==="live") renderLive(); if(v==="qte") loadQte(); if(v==="rank") loadRank();
   if(v==="players") loadPlayers(); if(v==="history") loadHistory(); if(v==="reports") loadReports(); if(v==="download") loadRelease();
-  if(v==="log") loadLog(); if(v==="settings") loadSettings();
+  if(v==="log") loadLog(); if(v==="settings") loadSettings(); if(v==="telegrams") loadTelegrams();
   window.scrollTo(0,0);
 }
 
@@ -302,6 +330,47 @@ function show(v){
 async function loadProfiles(){ const {data} = await sb.from("profiles").select("*").order("created_at"); profiles=data||[]; }
 async function loadStatus(){ const {data} = await sb.from("bot_status").select("*"); status={}; (data||[]).forEach(s=>status[s.user_id]=s); }
 async function stats(days, uid){ const {data,error} = await sb.rpc("panel_stats",{p_days:days, p_user:uid||null}); if(error){ console.error(error); return null; } return data; }
+
+// ---------- télégrammes (carnet d'adresses) ----------
+async function loadTelegrams(){
+  const list=$("tg-list"); if(!list) return; list.innerHTML='<p class="note">Chargement…</p>';
+  const {data,error}=await sb.rpc("telegrams_list");
+  if(error){ list.innerHTML=`<p class="note" style="color:var(--bad)">Erreur : ${esc(error.message)}</p>`; return; }
+  const rows=data||[]; $("tg-count").textContent=rows.length+" télégramme(s)";
+  if(!rows.length){ list.innerHTML='<p class="note">Aucun télégramme pour l\'instant. Ajoute le premier avec le bouton ci-dessus.</p>'; return; }
+  const badgeStyle="font-size:12px;border:1px solid var(--line);border-radius:20px;padding:1px 9px;margin-left:8px";
+  list.innerHTML=rows.map(t=>{
+    const badge = !t.is_public
+      ? `<span style="${badgeStyle};color:var(--mut)">🔒 privé</span>`
+      : `<span style="${badgeStyle};color:var(--ok)">📢 ${t.is_mine?"public":esc(t.owner_pseudo||"public")}</span>`;
+    const name=[t.prenom,t.nom].filter(Boolean).map(esc).join(" ");
+    const fonction=t.fonction?((name?" · ":"")+esc(t.fonction)):"";
+    const del=t.is_mine?`<button class="b" style="padding:4px 10px;font-size:12px" onclick="delTelegram(${t.id})">Supprimer</button>`:"";
+    return `<div class="card" style="margin-bottom:10px;padding:12px 14px">
+      <div class="row" style="align-items:center"><b style="color:var(--gold);font-size:18px">#${esc(t.numero)}</b>${badge}<div class="sp"></div>${del}</div>
+      ${(name||fonction)?`<div style="margin-top:4px">${name}${fonction}</div>`:""}
+      ${t.note?`<div class="note" style="margin-top:4px">${esc(t.note)}</div>`:""}
+    </div>`;
+  }).join("");
+}
+async function addTelegram(){
+  const num=($("tg-num").value||"").trim();
+  if(!/^[0-9]{1,6}$/.test(num)){ $("tg-err").textContent="Le numéro doit faire 1 à 6 chiffres."; return; }
+  $("tg-err").textContent="";
+  const body={numero:num, fonction:$("tg-fonction").value.trim()||null, prenom:$("tg-prenom").value.trim()||null, nom:$("tg-nom").value.trim()||null, note:$("tg-note").value.trim()||null, is_public:$("tg-public").checked};
+  const {error}=await sb.from("telegrams").insert(body);
+  if(error){ $("tg-err").textContent=error.message; return; }
+  ["tg-num","tg-fonction","tg-prenom","tg-nom","tg-note"].forEach(i=>$(i).value=""); $("tg-public").checked=false;
+  $("tg-form").classList.add("hidden"); loadTelegrams();
+}
+async function delTelegram(id){
+  if(!confirm("Supprimer ce télégramme ?")) return;
+  const {error}=await sb.from("telegrams").delete().eq("id",id);
+  if(error) return alert(error.message);
+  loadTelegrams();
+}
+if($("tg-new")){ $("tg-new").onclick=()=>$("tg-form").classList.toggle("hidden"); $("tg-cancel").onclick=()=>{$("tg-form").classList.add("hidden");$("tg-err").textContent="";}; $("tg-save").onclick=addTelegram; }
+window.delTelegram=delTelegram; window.loadTelegrams=loadTelegrams;
 
 function fillDays(days, n){
   const out=[], map={}; (days||[]).forEach(d=>map[d.d]=d);
